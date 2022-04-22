@@ -16,12 +16,12 @@ use App\Mail\Forget_pass;
 
 class Users_auth extends Controller
 {
-
+    
 
 
 
     public function register(Request $request){
-
+    
         $validator = UserRepo::UserRegisterValidate($request);
         if($validator->fails()) {
             return UserRepo::ValidateResponse($validator);
@@ -29,11 +29,11 @@ class Users_auth extends Controller
 
         $validator = $validator->validated();
         unset($validator['confirmPassword']);
-        $validator['api_token'] = Str::random(50);
+
         $userr = User::create($validator);
         $data['status'] = true;
-        $data['user'] = $userr->makeHidden(['image_url','operations'])->makeVisible(['image_path','api_token']);
-
+        $data['user'] = $userr->makeHidden(['image_url','operations'])->makeVisible('image_path') ;
+        
         return $data;
     }
 
@@ -43,7 +43,7 @@ class Users_auth extends Controller
 
     public function login(Request $request){
 
-
+        
         $validator = UserRepo::UserLoginValidate($request);
         if($validator->fails()) {
             return UserRepo::ValidateResponse($validator);
@@ -54,12 +54,12 @@ class Users_auth extends Controller
 
         if(!empty($user)) {
             if(Hash::check($validator['password'],$user->password)){
-
+                
                 $user->api_token = empty($user->api_token) ? Str::random(50) : $user->api_token;
                 $user->save();
 
                 $data['status'] = true;
-                $data['user'] = $user->makeHidden(['image_url','operations'])->makeVisible(['image_path','api_token']);
+                $data['user'] = $user->makeVisible(['api_token','image_path'])->makeHidden(['image_url','operations']);
             }else{
                 $data['status'] = false;
                 $data['message'] = 'Error_pass';
@@ -80,7 +80,7 @@ class Users_auth extends Controller
 
         if(Auth::guard('api')->check()) {
             $data['status'] = true;
-            $data['user'] = Auth::guard('api')->user()->makeHidden(['image_url','operations'])->makeVisible(['image_path','api_token']);
+            $data['user'] = Auth::guard('api')->user()->makeHidden(['image_url','operations'])->makeVisible('image_path');
         }else{
             $data['status'] = false;
             $data['message'] = Lang::get('leftsidebar.plz_login');
@@ -94,7 +94,7 @@ class Users_auth extends Controller
 
 
     public function updateProfile(Request $request){
-
+        
         $validator = UserRepo::UserUpdateValidate($request);
         if($validator->fails()) {
             return UserRepo::ValidateResponse($validator);
@@ -114,7 +114,7 @@ class Users_auth extends Controller
 
         $user->update($data);
         $info['status'] = true;
-        $info['user'] = $user->makeHidden(['image_url','operations'])->makeVisible(['image_path','api_token']);
+        $info['user'] = $user->makeHidden(['image_url','operations'])->makeVisible('image_path');
 
         return $info;
     }
@@ -130,7 +130,7 @@ class Users_auth extends Controller
             return UserRepo::ValidateResponse($validator);
         }
         $validator = $validator->validate();
-
+        
         $user = User::where('email',$validator['email'])->first();
         if (!empty($user)) {
             $user->verify_token = Str::random(50);
@@ -152,7 +152,7 @@ class Users_auth extends Controller
 
 
     public function changePassword(Request $request){
-
+        
         $validator = UserRepo::UserChangePassValidate($request);
         if($validator->fails()) {
             return UserRepo::ValidateResponse($validator);
@@ -180,9 +180,9 @@ class Users_auth extends Controller
         $user = Auth::guard('api')->user();
         $user->api_token = null;
         $user->save();
-
+        
         $data['status'] = true;
-        $data['message'] = "Logged out successfully";
+        $data['message'] = Lang::get('leftsidebar.Logged_out');
         return $data;
     }
 
