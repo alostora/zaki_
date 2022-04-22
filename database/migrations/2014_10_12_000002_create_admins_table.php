@@ -19,6 +19,16 @@ class CreateAdminsTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+
+
+            $table->bigInteger('permission_id')->unsigned()->nullable();
+            $table->foreign('permission_id')
+            ->references('id')
+            ->on('permissions')
+            ->nullOnDelete()
+            ->onUpdate('cascade');
+
+
             $table->rememberToken();
             $table->timestamps();
         });
