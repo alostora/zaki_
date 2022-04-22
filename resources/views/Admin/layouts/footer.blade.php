@@ -303,13 +303,16 @@
       'autoWidth'   : false
     })*/
 
+    @if(!empty(Request::segment(2)))
     
-    $("#{{Request::segment(2)}}").css("color", "#fff");
-    /*@if(!empty(Request::segment(2)))
+      $("#{{Request::segment(2)}}").css("color", "#fff");
       $(".{{Request::segment(2)}}").addClass("menu-open");
       $(".tree-{{Request::segment(2)}}").css("display",'block');
-      $("#{{Request::segment(3)}}").css("color", "#fff");
-    @endif*/
+
+      @if(!empty(Request::segment(3)))
+        $("#{{Request::segment(3)}}").css("color", "#91bc3c");
+      @endif
+    @endif
   });
 
 

@@ -27,6 +27,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('country');
             $table->string('country_key');
+            $table->boolean('online');
+            $table->string('last_login_at');
             $table->rememberToken();
             $table->timestamps();
         });

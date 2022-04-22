@@ -39,8 +39,8 @@ class Permission extends Model
 
     public function getOperationsAttribute($value){
         return [
-            "edit" => url('admin/Permission/viewCreatePermission/'.$this->id),
-            "delete" => url('admin/Permission/deletePermission/'.$this->id),
+            "edit" => url('admin/Admin/Permission/viewCreatePermission/'.$this->id),
+            "delete" => url('admin/Admin/Permission/deletePermission/'.$this->id),
         ];
     }
 }

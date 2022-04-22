@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Chat\User_lang;
 
 class User extends Authenticatable
 {
@@ -27,6 +28,8 @@ class User extends Authenticatable
         'password',
         'country',
         'country_key',
+        'online',//bolean
+        'last_login_at',
     ];
 
     /**
@@ -36,6 +39,7 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'image',
+        'phone',
         'image_path',
         'password',
         'verify_token',
@@ -64,6 +68,7 @@ class User extends Authenticatable
     protected $appends = [
         'image_url',
         'image_path',
+        'langauges',
         'operations'
     ];
 
@@ -77,6 +82,12 @@ class User extends Authenticatable
 
     public function getImagePathAttribute($value){
         return url('uploads/users/'.$this->image);
+    }
+
+
+
+    public function getLangaugesAttribute($value){
+        return User_lang::where('user_id',$this->id)->get();
     }
 
 

@@ -20,7 +20,6 @@ class Admin extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'permission_id',
         'password',
     ];
 
@@ -33,7 +32,6 @@ class Admin extends Authenticatable
         'password',
         'remember_token',
         'email_verified_at',
-        'permission_id',
         'created_at',
         'updated_at',
     ];
@@ -52,22 +50,8 @@ class Admin extends Authenticatable
 
 
     protected $appends = [
-        'permissions',
-        'operations',
+        'operations'
     ];
-
-
-    public function getPermissionsAttribute($value){
-
-        $permission = Permission::find($this->permission_id);
-        if ($permission){
-            return $permission->name;
-        }
-
-        return 'no permission for this user';
-    }
-
-
 
     public function getOperationsAttribute($value){
 
