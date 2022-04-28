@@ -55,12 +55,12 @@ class Item extends Model
 
 
     public function getNameAttribute($value){
-        return app()->getLocale() == 'ar' ? $this->itemNameAr : $this->itemName;
+        return $this->itemName;
     }
 
 
     public function getDescAttribute($value){
-        return app()->getLocale() == 'ar' ? $this->itemDescAr : $this->itemDesc;
+        return $this->itemDesc;
     }
 
 
