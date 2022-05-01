@@ -48,7 +48,7 @@
                     </div>
                 </div>
 
-                <div class="size_id">
+                <!-- <div class="size_id">
                     <label for="size_id" class="col-sm-2 control-label">@lang('item.size_id')</label>
                     <div class="col-sm-4">
                         <option value="">@lang('general.choose')</option>
@@ -63,7 +63,7 @@
                         </select>
                         <span class="help-block size_id" style="display:none;"></span>
                     </div>
-                </div>
+                </div> -->
             </div>
 
             <div class="form-group">
@@ -89,17 +89,48 @@
             <div class="form-group">
 
                 <div class="color_id">
-                    <label for="color_id" class="col-sm-2 control-label">@lang('item.color_id')</label>
                     <div class="">
                         @if(!empty($colors))
-                                <div class="input-group input-group-md">
-                            @foreach($colors as $color)
-                                    <span class="input-group-btn">
-                                        <span class="btn btn-info btn-flat btn-md" style="background-color: {{$color->colorCode}}">{{$color->name}}</span>
-                                    </span>
-                                    <input type="number" class="form-control input-md" name="color_id[{{$color->id}}]" value="{{!empty($data) && !empty($selectedColors) && in_array($color->id, $selectedColors) ?array_search($color->id, $selectedColors): '0'}}">
-                            @endforeach
-                                </div>
+                            <div id="size_id">
+                                @foreach($colors as $color)
+                                    @if(!empty($sizes))
+
+
+                                        <div class="col-md-2">
+                                            <div class="box box-default collapsed-box" style="border-top-color: {{$color->colorCode}}">
+                                                <div class="box-header with-border">
+                                                    <h3 class="box-title"> {{$color->name}}</h3>
+
+                                                    <div class="box-tools pull-right">
+                                                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                                            <i class="fa fa-plus"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="box-body">
+                                                    @foreach($sizes as $size)
+
+                                                        <?php $value = 0; ?>
+                                                        @if(!empty($selectedColors))
+                                                            @foreach($selectedColors as $selected)
+                                                                @if($selected->color_id == $color->id && $selected->size_id ==  $size->id)
+                                                                    <?php $value = $selected->qty; ?>
+                                                                @endif
+                                                            @endforeach
+                                                        @endif
+
+                                                    <div class="form-group" style="color: {{$color->colorCode}}">
+                                                        <label class="control-label" for="{{$color->id}}"><i class="fa fa-check"></i> {{$size->name}}</label>
+                                                        <input type="number" id="{{$color->id}}" class="form-control" name="color_id[{{$color->id}}][{{$size->id}}]" value="{{$value}}">
+                                                    </div>
+
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            </div>
                         @endif
                     </div>
                 </div>
@@ -144,14 +175,40 @@
         if (res.status){
           if(res.sizes.length > 0){
             $('#size_id').html('');
-            for (var i = res.sizes.length - 1; i >= 0; i--) {
-              $('#size_id').append($('<option>',
-               {
-                  value: res.sizes[i].id,
-                  text : res.sizes[i].name
-              }));
-            }
-            console.log(res);
+
+            @if(!empty($colors))
+                    dropDown = "";
+
+                @foreach($colors as $color)
+                    dropDown += 
+                    "<div class='col-md-2'>"+
+                        "<div class='box box-default collapsed-box color-{{$color->id}}' style='border-top-color: {{$color->colorCode}}'>"+
+                            "<div class='box-header with-border'>"+
+                                "<h3 class='box-title'> {{$color->name}}</h3>"+
+
+                                "<div class='box-tools pull-right'>"+
+                                    "<button type='button' class='btn btn-box-tool' data-widget='collapse' onclick='return openMenu({{$color->id}})'>"+
+                                        "<i class='fa fa-plus'></i>"+
+                                    "</button>"+
+                                "</div>"+
+                            "</div>"+
+                            "<div class='box-body'>";
+
+                            for (var i =0; i< res.sizes.length; i++) {
+
+                                dropDown += 
+                                "<div class='form-group' style='color: {{$color->colorCode}}'>"+
+                                    "<label class='control-label' for='{{$color->id}}'><i class='fa fa-check'></i> "+res.sizes[i].name+"</label>"+
+                                    "<input type='number' id='{{$color->id}}' class='form-control' name='color_id[{{$color->id}}]["+res.sizes[i].id+"]' value='0'>"+
+                                "</div>";
+                            }
+
+                    dropDown += "</div></div></div>";
+                @endforeach
+                $('#size_id').append(dropDown);
+            @endif
+
+            //console.log(res);
           }
         }/*else{
           location.href = "{{url('admin/viewCreateSize')}}";
@@ -162,19 +219,14 @@
 
 
 
-function countColors(sel){
-    var opts = [],
-    opt;
-    var len = sel.options.length;
-    for (var i = 0; i < len; i++) {
-        opt = sel.options[i];
-        if (opt.selected) {
-          opts.push(opt.value);
-          //alert(opt.value);
-        }
+function openMenu(className){
+
+    if($(".color-"+className).hasClass('collapsed-box')){
+        $(".color-"+className).removeClass('collapsed-box');
+    }else{
+        $(".color-"+className).addClass('collapsed-box');
     }
 
-  console.log(opts);
 }
 
 

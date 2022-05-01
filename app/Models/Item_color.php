@@ -12,6 +12,7 @@ class Item_color extends Model
     protected $fillable = [
         'item_id',
         'color_id',
+        'size_id',
         'qty',
     ];
 }

@@ -16,10 +16,19 @@ return new class extends Migration
         Schema::create('item_colors', function (Blueprint $table) {
             $table->id();
             $table->integer('qty')->unsigned()->default(1);
+
             $table->bigInteger('color_id')->unsigned()->nullable();
             $table->foreign('color_id')
             ->references('id')
             ->on('colors')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+
+
+            $table->bigInteger('size_id')->unsigned()->nullable();
+            $table->foreign('size_id')
+            ->references('id')
+            ->on('sizes')
             ->onDelete('cascade')
             ->onUpdate('cascade');
 
