@@ -163,7 +163,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'lang'],funct
 			Route::post('createState','States@createState')->middleware('permissions:State,create');
 			Route::get('deleteState/{id}','States@deleteState')->middleware('permissions:State,delete');
 			Route::get('deleteManyStates/{ids}','States@deleteManyStates')->middleware('permissions:State,delete');
-			//cities //without middleware ajax request
+			//cities //without permission middleware ajax request
 			Route::get('getCities/{city_id}','States@getCities');
 		});
 
@@ -198,8 +198,25 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'lang'],funct
 			//item_images
 			Route::post('createItemImages','Items@createItemImages')->middleware('permissions:Item_image,create');
 			Route::get('removedFile/{id}','Items@removedFile')->middleware('permissions:Item_image,delete');
-			//sizes //without middleware ajax request
+			//sizes //without permission middleware ajax request
 			Route::get('getSizes/{sub_cat_id}','Items@getSizes');
+		});
+
+
+
+		//orders
+		Route::group(['prefix'=>'Order'],function(){
+			Route::get('ordersInfo','Orders@ordersInfo')->middleware('permissions:Order,view');
+			Route::get('viewCreateOrder/{id?}','Orders@viewCreateOrder')->middleware('permissions:Order,create');
+			Route::post('createUser','Orders@createUser')->middleware('permissions:User,create');
+			Route::post('createOrder','Orders@createOrder')->middleware('permissions:Order,create');
+			Route::get('deleteOrder/{id}','Orders@deleteOrder')->middleware('permissions:Order,delete');
+			Route::get('deleteManyOrders/{ids}','Orders@deleteManyOrders')->middleware('permissions:Order,delete');
+			
+			//order_items
+			// Route::post('createItemImages','Orders@createItemImages')->middleware('permissions:Order_item,create');
+			// Route::get('removedFile/{id}','Orders@removedFile')->middleware('permissions:Order_item,delete');
+			
 		});
 
 

@@ -129,6 +129,12 @@
                         </a>
                     </li>
 
+                    <li>
+                        <a href="{{url('admin/Order/ordersInfo')}}" id="Order">
+                            <i class="fa fa-gift"></i>@lang('leftsidebar.Orders')
+                        </a>
+                    </li>
+
                 </ul>
             </li> 
         </ul>

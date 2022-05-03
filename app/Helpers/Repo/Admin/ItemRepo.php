@@ -20,10 +20,11 @@ class ItemRepo extends Repo{
             'sub_cat_id' => 'required|max:5000',
 
         ];
-	}public 
+	}
 
 
-    static function createImageValidate(){
+
+    public static function createImageValidate(){
         return [
             'images' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:4048',
         ];

@@ -25,8 +25,9 @@ class User extends Authenticatable
         'gender',
         'birthDate',
         'password',
-        'country',
-        'country_key',
+        'country_id',
+        'city_id',
+        'shippingAddress',
     ];
 
     /**
@@ -41,8 +42,8 @@ class User extends Authenticatable
         'image_path',
         'password',
         'verify_token',
-        'country',
-        'country_key',
+        'country_id',
+        'city_id',
         'api_token',
         'remember_token',
         'email_verified_at',
