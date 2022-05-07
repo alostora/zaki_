@@ -209,7 +209,10 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'lang'],funct
 			Route::get('ordersInfo','Orders@ordersInfo')->middleware('permissions:Order,view');
 			Route::get('viewCreateOrder/{id?}','Orders@viewCreateOrder')->middleware('permissions:Order,create');
 			Route::post('createUser','Orders@createUser')->middleware('permissions:User,create');
+			Route::get('getUser/{user_id}','Orders@getUser')->middleware('permissions:User,view');
+			Route::get('oneItemInfo/{item_id}','Orders@oneItemInfo')->middleware('permissions:User,view');
 			Route::post('createOrder','Orders@createOrder')->middleware('permissions:Order,create');
+			Route::get('changeOrderStatus/{id}/{status}','Orders@changeOrderStatus')->middleware('permissions:Order,create');
 			Route::get('deleteOrder/{id}','Orders@deleteOrder')->middleware('permissions:Order,delete');
 			Route::get('deleteManyOrders/{ids}','Orders@deleteManyOrders')->middleware('permissions:Order,delete');
 			

@@ -69,6 +69,8 @@ class User extends Authenticatable
     protected $appends = [
         'image_url',
         'image_path',
+        'country',
+        'city',
         'operations'
     ];
 
@@ -82,6 +84,16 @@ class User extends Authenticatable
 
     public function getImagePathAttribute($value){
         return url('uploads/users/'.$this->image);
+    }
+
+
+    public function getCountryAttribute($value){
+        return Country::find($this->country_id)->name;
+    }
+
+
+    public function getCityAttribute($value){
+        return City::find($this->city_id)->name;
     }
 
 

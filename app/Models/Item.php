@@ -37,7 +37,8 @@ class Item extends Model
         'country_id',
         'type_id',
         'updated_at',
-        'created_at'
+        'created_at',
+        'item_colors_sizes'
     ];
 
 
@@ -48,8 +49,8 @@ class Item extends Model
         'category',
         'sub_category',
         //'images',
-        //'colors',
-        'operations'
+        'operations',
+        'item_colors_sizes',
     ];
 
 
@@ -95,7 +96,7 @@ class Item extends Model
 
 
 
-    public function getColorsAttribute($value){
+    public function getItemColorsAttribute($value){
         $colors = Color::get()->makeHidden(['code','operations'])->makeVisible('colorCode');
         return $colors;
     }
@@ -107,6 +108,13 @@ class Item extends Model
             "edit" => url('admin/Item/viewCreateItem/'.$this->id),
             "delete" => url('admin/Item/deleteItem/'.$this->id),
         ];
+    }
+
+
+
+
+    public function getItemColorsSizesAttribute(){
+        return Item_color::where('item_id',$this->id)->get();
     }
 
 

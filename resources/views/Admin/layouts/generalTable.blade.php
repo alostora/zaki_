@@ -45,12 +45,16 @@
 							@endforeach
 				          	<td>
 					          	<div class="btn-group">
+				          	 		@if(isset($dat->operations['view']))
+				          	 			{!! $dat->operations['view'] !!}
+				          	 		@endif
 					          		<a class="btn btn-success" href="{{$dat->operations['edit']}}">
 					          			<i class="fa fa-edit"></i>
 					          		</a>
 				          	 		<a class="btn btn-danger" href="{{$dat->operations['delete']}}" onclick="return confirm('Are you sure?');" >
 				          	 			<i class="fa fa-trash"></i>
 				          	 		</a>
+
 			          	 		</div>
 				          	</td>
 				          	<td>
@@ -59,6 +63,7 @@
 			                  	</label>
 				          	</td>
 				      	</tr>
+						@include('Admin/layouts/Orders/viewOrderItemsModal')
 					@endforeach
 				@endif
       		</tbody>
@@ -74,7 +79,6 @@
 		$(".checkbox").prop('checked',checked);
 		$('button').prop("disabled", !checked)
 
-
 		if($('.checkbox:checked').length == "{{count($data)}}") {
 			$('#all').prop('checked',true)
 			$('button').prop("disabled", false)
@@ -85,13 +89,13 @@
 			$('#all').prop('checked',true)
 			$('button').prop("disabled", false)
 		}
-
-
-
 	}
 
-	function appendValue(e) {
 
+
+
+
+	function appendValue(e) {
 		if( $('#'+e.id).is(':checked') ){
 
 			$('#'+e.id).prop('checked',true)
@@ -110,6 +114,9 @@
 	}
 
 
+
+
+
 	function deleteAll(){
 		if (confirm('are you sure ?')){
 			var selected = new Array();
@@ -118,6 +125,39 @@
 		  	});
 	  		location.href = "{{$deletePath}}/" + JSON.stringify(selected);
 		}
+	}
+
+
+
+
+
+	function showItems(id){
+        $("#items"+id).modal('show');
+	    /*if($("#items"+id).hasClass('collapse')){
+	        $("#items"+id).removeClass('collapse');
+	    }else{
+	        $("#items"+id).addClass('collapse');
+	    }*/
+	}
+
+
+
+
+	function changeOrderStatus(orderId){
+
+		if (confirm('you will change order status ?')) {
+			status = $("#"+orderId).val();
+			$.ajax({
+	      		url:"{{url('admin/Order/changeOrderStatus')}}/"+orderId+"/"+status,
+		      	type:"get",
+		      	success : function(res){
+			        if(res.status){
+			          	alert('order status changed');
+			        }
+		      	}
+		    });
+		}
+
 	}
 
 </script>

@@ -15,4 +15,25 @@ class Item_color extends Model
         'size_id',
         'qty',
     ];
+
+
+
+
+    protected $appends = [
+        'colors',
+        'sizes',
+    ];
+
+
+
+
+
+    public function getColorsAttribute(){
+        return Color::find($this->color_id);
+    }
+
+
+    public function getSizesAttribute(){
+        return Size::find($this->size_id);
+    }
 }

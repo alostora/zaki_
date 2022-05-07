@@ -10,12 +10,18 @@ class OrderRepo extends Repo{
 		return [
             'id' => 'nullable',
             'item_color_id' => 'required|array|max:30',
+            'item_color_id.*' => 'required|integer|max:30000',
+
+            'item_count' => 'required|array|max:30',
+            'item_count.*' => 'required|integer|max:3000',
+
             'user_id' => 'required',
             'paymentMethod' => 'required|in:online,cash',
-            'shippingDetails' => 'required|max:700',
-            'notes' => 'required|max:700',
-            'discountCopon' => 'integer|min:100000|max:999999',
+            'total_price' => 'required|integer|min:1|max:100000',
+            'discountCopon' => 'nullable|integer|min:1000|max:9999',
             'shippingValue' => 'integer|max:10000',
+            'shippingDetails' => 'max:700',
+            'notes' => 'max:700',
 
         ];
 	}
@@ -25,9 +31,10 @@ class OrderRepo extends Repo{
 
     public static function UserCreateValidate($request){
         return [
+            "id" => "max:9999999999",
             "name" => "required|max:50",
-            'email' => 'unique:users,email,|max:50',
-            'phone' => 'required|unique:users,phone,|max:20',
+            'email' => 'unique:users,email,'.$request->id.'|max:50',
+            'phone' => 'required|unique:users,phone,'.$request->id.'|max:20',
             'shippingAddress' => 'required|max:250',
             'city_id' => 'integer|max:100000',
             

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
 
-            $table->string('orderCode')->nullable(\Str::random(6));
+            $table->string('orderCode')->nullable();
             $table->string('status')->default('new');
             
             $table->text('shippingDetails')->nullable();

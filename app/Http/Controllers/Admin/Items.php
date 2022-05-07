@@ -43,14 +43,10 @@ class Items extends Controller
         if (!empty($data['data'])) {
 
             $data['sizes']= Size::where('type_id',$data['data']->type_id)->get();
-            $data['selectedSizes'] = Item_size::where('item_id',$data['data']->id)->pluck('size_id')->toArray();
+            
             $data['selectedColors'] = Item_color::where('item_id',$data['data']->id)->get([
                 'color_id','size_id','qty'
             ]);
-
-            //return $data['selectedColors'];
-
-            //return $data['selectedColors'][array_search(1, $data['selectedColors'])];
         }
 
         if (!count($data['countries'])) {
@@ -70,7 +66,6 @@ class Items extends Controller
 
     public function createItem(Request $request){
 
-
         $validated = $request->validate(ItemRepo::ItemCreateValidate($request));
         $destinationPath = public_path('Admin_uploads/items/');
 
@@ -79,51 +74,13 @@ class Items extends Controller
         
         $validated['cat_id'] = $category->id;
         $validated['type_id'] = $category->type_id;
+        $validated['itemDiscount'] = $validated['itemDiscount'] != null ? $validated['itemDiscount'] : 0;
 
         if(empty($validated['id'])){
             $validated['id'] = Item::create($validated)->id;
         }else{
             Item::where('id',$validated['id'])->update($validated);
         }
-
-
-       /*$size_id = $request->size_id;
-        if (!empty($size_id) && is_array($size_id)) {
-            Item_size::where('item_id',$validated['id'])->delete();
-            foreach($size_id as $sizeId){
-                $size = Size::find($sizeId);
-                if(!empty($size)){
-                    Item_size::create([
-                        'item_id' => $validated['id'],
-                        'size_id' => $size->id,
-                    ]);
-                }
-            }
-        }*/
-
-        /*$color_id = $request->color_id;
-        if (!empty($color_id) && is_array($color_id)) {
-            Item_color::where('item_id',$validated['id'])->delete();
-            foreach($color_id as $colorId=>$qty){
-                if ($qty>0) {
-                    $color = Color::find($colorId);
-                    if(!empty($color)){
-                        Item_color::create([
-                            'item_id' => $validated['id'],
-                            'color_id' => $color->id,
-                            'qty' => $qty,
-                        ]);
-                    }
-                }
-            }
-            $qty = array_sum(array_values($color_id));
-            Item::where('id',$validated['id'])->update(['itemCount'=>$qty]);
-        }*/
-
-
-
-
-
 
         $color_id = $request->color_id;
         if (!empty($color_id) && is_array($color_id)) {
@@ -142,24 +99,17 @@ class Items extends Controller
                                 ]);
                             }
                         }
-
-                        // $qty = array_sum(array_values($sizesQty));
-                        // Item::where('id',$validated['id'])->update(['itemCount'=>$qty]);
                     }
                 }
             }
         }
 
-       // return $request->color_id;
-
-
-
-
-
-
         session()->flash('success','created');
         return redirect('admin/Item/viewCreateItem/'.$validated['id']);
     }
+
+
+
 
 
 

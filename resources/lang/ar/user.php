@@ -19,6 +19,8 @@ return [
     'name' => 'Name',
     'image_url' => 'Image',
     'type' => 'Main type',
+    'city_id' => 'City',
+    'shippingAddress' => 'Shipping address',
 
 
 
