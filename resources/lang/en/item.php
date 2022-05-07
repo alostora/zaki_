@@ -42,6 +42,9 @@ return [
 
 
     'mainInfoTap' => 'Main informations',
+    'item_count' => 'Quantity',
+    'totalPrice' => 'Total price',
+    'items_details' => 'Order details',
     
 
 ];

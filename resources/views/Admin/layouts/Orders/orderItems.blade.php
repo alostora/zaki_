@@ -20,7 +20,7 @@
                                 @lang('order.item_color_id')
                             </label>
                             <div class="col-sm-4">
-                                <select id="item_color_id{{$orderItem->id}}" type="text" name="item_color_id[]" class="form-control itemPrice{{$orderItem->id}} item_count{{$orderItem->id}} totalPrice{{$orderItem->id}} select2" onchange="return getPriceAppended(this.value,this.className);">
+                                <select id="item_color_id{{$orderItem->id.$key}}" type="text" name="item_color_id[]" class="form-control itemPrice{{$orderItem->id.$key}} item_count{{$orderItem->id.$key}} totalPrice{{$orderItem->id.$key}} select2" onchange="return getPriceAppended(this.value,this.className);">
                                     <option value="">choose item</option>
                                     @if(!empty($items))
                                         @foreach($items as $item)
@@ -45,20 +45,20 @@
                                 @lang('order.itemPrice')
                             </label>
                             <div class="col-sm-4">
-                                <input id="itemPrice{{$orderItem->id}}" type="number" class="form-control" placeholder="@lang('order.itemPrice')" value="{{$orderItem->item_colors_sizes->itemPrice}}" required readonly>
+                                <input id="itemPrice{{$orderItem->id.$key}}" type="number" class="form-control" placeholder="@lang('order.itemPrice')" value="{{$orderItem->item_colors_sizes->itemPrice}}" required readonly>
                             </div>
 
                         </div>
                         
                         <div class="form-group">
-                            <label for="item_count{{$orderItem->id}}" class="col-sm-2 control-label">
+                            <label for="item_count{{$orderItem->id.$key}}" class="col-sm-2 control-label">
                                 @lang("order.item_count")
                             </label>
                             <div class="col-sm-4">
-                            <input id="item_count{{$orderItem->id}}" class="form-control totalPrice{{$orderItem->id.$key}} itemPrice{{$orderItem->id}} item_color_id{{$orderItem->id}}" onkeyup="return totalPriceeAppended(this.value,this.className,this.id);" type="number" name="item_count[]" placeholder="@lang('order.item_count')" required value="{{$orderItem->item_count}}">
+                            <input id="item_count{{$orderItem->id.$key}}" class="form-control totalPrice{{$orderItem->id.$key}} itemPrice{{$orderItem->id.$key}} item_color_id{{$orderItem->id.$key}}" onkeyup="return totalPriceeAppended(this.value,this.className,this.id);" type="number" name="item_count[]" placeholder="@lang('order.item_count')" required value="{{$orderItem->item_count}}">
                             </div>
 
-                            <label for="totalPrice{{$orderItem->id}}" class="col-sm-2 control-label">
+                            <label for="totalPrice{{$orderItem->id.$key}}" class="col-sm-2 control-label">
                                 @lang('order.totalPrice')
                             </label>
                             <div class="col-sm-4">

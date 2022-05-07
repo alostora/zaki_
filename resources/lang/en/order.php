@@ -8,6 +8,7 @@ return [
 
     'orderCode' => 'Code',
     'status' => 'Status',
+    'order_status' => 'Status',
     'shippingDetails' => 'Shipping details',
     'notes' => 'Notes',
     'paymentMethod' => 'Payment method',

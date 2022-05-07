@@ -24,6 +24,7 @@
 
 
 
+
     function emptyModal(){
         $("#id").val('');
         $("#name").val('');
@@ -62,14 +63,7 @@
 
                 $("#totalPrice").val(itemPrice * item_count);
 
-
-                var arrVal = [];
-                for(var i=0; i< document.getElementsByClassName('totalPrice').length; i++){
-                  arrVal.push(parseInt(document.getElementsByClassName('totalPrice')[i].value));
-                }
-                 
-                shippingValue = parseInt($("#shippingValue").val());
-                $("#totalAllPrice").val(arrVal.reduce((a, b) => a + b)+shippingValue);
+                calcTotalAllPrice();
 
             }
         });
@@ -103,15 +97,10 @@
               totalPrice = item_count * itemPrice;
             $("#totalPrice").val(totalPrice);
 
-            var arrVal = [];
-            for(var i=0; i< document.getElementsByClassName('totalPrice').length; i++){
-              arrVal.push(parseInt(document.getElementsByClassName('totalPrice')[i].value));
-            }
-             
-            shippingValue = parseInt($("#shippingValue").val());
-            $("#totalAllPrice").val(arrVal.reduce((a, b) => a + b)+shippingValue);
+            calcTotalAllPrice();
         }
     }
+
 
 
 
@@ -121,7 +110,6 @@
         counter++;
         //alert(counter);
         $("#addNewItem").append(
-
             '<div>'+
                 '<div class="box box-primary direct-chat direct-chat-primary">'+
                     '<div class="box-header with-border">'+
@@ -182,7 +170,6 @@
                     '</div>'+
                 '</div>'+
             '</div>'
-
         );
 
         $(document).ready(function() {
@@ -217,23 +204,12 @@
 
                 $("#"+totalPrice).val(itemPrice * itemCount);
                 $("#"+itemPriceId).val(itemPrice);
-
-                var arrVal = [];
-                for(var i=0; i< document.getElementsByClassName('totalPrice').length; i++){
-                  arrVal.push(parseInt(document.getElementsByClassName('totalPrice')[i].value));
-                }
-                 
-                shippingValue = parseInt($("#shippingValue").val());
-                $("#totalAllPrice").val(arrVal.reduce((a, b) => a + b)+shippingValue);
+                
+                calcTotalAllPrice();
 
             }
         });
     }
-
-
-
-
-
 
 
 
@@ -251,72 +227,48 @@
                 url: "{{url('admin/Order/oneItemInfo')}}"+"/"+item_id,
                 cache: false,
                 success: function(result){
-                  /*if(parseInt(result.item_count) < parseInt(itemCountt)){
-
-                    alert("@lang('order.stock has low value from this product') "+ result.item_count);
-
-                    $("#totalAllPrice").val($("#totalAllPrice").val() - $('#'+totalPrice).val())
-                    $('#'+itemId).val(0);
-                    $('#'+totalPrice).val(0);
-                    
-                    return false;
-                  }*/
-
+                    //do some thing hosam
                 }
             });
           
-          var itemPriceAppended = $("#"+itemPrice).val();
+            var itemPriceAppended = $("#"+itemPrice).val();
               totalPriceAppended = itemCountt * itemPriceAppended;
 
-          $("#"+totalPrice).val(totalPriceAppended);
+            $("#"+totalPrice).val(totalPriceAppended);
 
-
-          var arrVal = [];
-              for(var i=0; i< document.getElementsByClassName('totalPrice').length; i++){
-                 if( Number.isNaN(parseInt(document.getElementsByClassName('totalPrice')[i].value)) == false){
-                    arrVal.push(parseInt(document.getElementsByClassName('totalPrice')[i].value));
-                  }
-              }
-                
-            shippingValue = parseInt($("#shippingValue").val());
-            $("#totalAllPrice").val(arrVal.reduce((a, b) => a + b)+shippingValue);
+            calcTotalAllPrice(shippingValue);
         }
     }
-
-
-
-
 
 
 
 
 
     function shippingValuee(e) {
-        
         shippingValue = parseInt(e.value);
-
-        var arrVal = [];
-        for(var i=0; i< document.getElementsByClassName('totalPrice').length; i++){
-          arrVal.push(parseInt(document.getElementsByClassName('totalPrice')[i].value));
-        }
-         
-        shippingValue = parseInt($("#shippingValue").val());
-        $("#totalAllPrice").val(arrVal.reduce((a, b) => a + b)+shippingValue);
-
+        calcTotalAllPrice(shippingValue);
     }
+
 
 
 
 
     function removeItem(id){
         var totalAllPrice = $('#totalAllPrice').val();
-        
-        var totalPrice = $('#totalPrice'+id).val();
+            totalPrice = $('#totalPrice'+id).val();
             $('#totalAllPrice').val(totalAllPrice - totalPrice);
 
         $("#"+id).parent().parent().parent().parent().remove();
+         calcTotalAllPrice();
+    }
 
 
+
+
+
+    function calcTotalAllPrice(shippingVal = 0) {
+        inputShippingVal = parseInt($("#shippingValue").val());
+        shippingValue = shippingVal != 0 ? shippingVal : inputShippingVal;
         var arrVal = [];
         for(var i=0; i< document.getElementsByClassName('totalPrice').length; i++){
           arrVal.push(parseInt(document.getElementsByClassName('totalPrice')[i].value));
@@ -329,17 +281,12 @@
 
 
 
+
     $(document).ready(function() {
         $('#itemName').select2();
-
-        var arrVal = [];
-        for(var i=0; i< document.getElementsByClassName('totalPrice').length; i++){
-          arrVal.push(parseInt(document.getElementsByClassName('totalPrice')[i].value));
-        }
-         
-        shippingValue = parseInt($("#shippingValue").val());
-        $("#totalAllPrice").val(arrVal.reduce((a, b) => a + b)+shippingValue);
-
-
+        calcTotalAllPrice();
     });
+
+
+
 </script>

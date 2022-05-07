@@ -38,7 +38,7 @@
 						<tr>
 				          	@foreach($dat->toArray() as $keyy=>$val)
 				          		@if($keyy != "operations" && $keyy != "id")
-									<td>{!! $val !!}</td>
+									<td width=" {{$keyy == 'user' ? '200px' : '50px'}} ">{!! $val !!}</td>
 								@elseif($keyy == "id")	
 									<td>{{ $key+1}}</td>
 								@endif
@@ -57,7 +57,7 @@
 
 			          	 		</div>
 				          	</td>
-				          	<td>
+				          	<td width="10px">
 			                  	<label>
 				                    <input type="checkbox" name="chk[]" value="{{$dat->id}}" class="checkbox" onclick="appendValue(this)" id="{{$dat->id}}">
 			                  	</label>

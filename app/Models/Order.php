@@ -35,9 +35,13 @@ class Order extends Model
     ];
 
 
+    protected $casts = [
+        'created_at' => 'date'
+    ];
+
+
     public $hidden = [
         'updated_at',
-        'created_at',
         'discountCopon',
         'admin_id',
         'user_id',
@@ -85,7 +89,7 @@ class Order extends Model
 
 
     public function getOrderStatusAttribute($value){
-        $orderStatus = ['new','accepted','inOperation','operationDone','salesMan','delivered','canceled','delayed'];
+        $orderStatus = ['New','Pending','Cancel','Printed','Shipping','Dely','Escaped','Refused','Devliered','Order Received','Collected'];
         $statusHTMLSELECT = 
                             '<div class="form-group" style="width:150px">
                                 <select class="form-control select2" id="'.$this->id.'" onchange="return changeOrderStatus('.$this->id.')">';

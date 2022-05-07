@@ -25,7 +25,7 @@ Dropzone.options.myAwesomeDropzone = { // The camelized version of the ID of the
     @if(!empty($data)&&count($data->images)>0)
     @foreach($data->images as $img)
       //fid param for delete
-      var mock = {name:'{{$img->imageName}}',size:50,fid:'{{$img->id}}'};
+      var mock = {name:'{{$img->imageName}}',size:false,fid:'{{$img->id}}'};
       this.emit('addedfile',mock);
       this.emit('thumbnail',mock, "{{url('Admin_uploads/items/'.$img->imageName)}}");
     @endforeach
@@ -45,6 +45,12 @@ Dropzone.options.myAwesomeDropzone = { // The camelized version of the ID of the
 
     //single file
     this.on("success", function(file, response) {
+
+      if (response.status == false) {
+        alert(response.message);
+        return false;
+      }
+
       file.fid = response.image.id;
       console.log("success");
       console.log(response.image);

@@ -41,9 +41,7 @@ class Items extends Controller
         $data['s_categories'] = S_category::get();
 
         if (!empty($data['data'])) {
-
             $data['sizes']= Size::where('type_id',$data['data']->type_id)->get();
-            
             $data['selectedColors'] = Item_color::where('item_id',$data['data']->id)->get([
                 'color_id','size_id','qty'
             ]);
@@ -163,13 +161,19 @@ class Items extends Controller
 
         $destinationPath = public_path('Admin_uploads/items/');
         if($request->hasFile('images')) {
+            $itemImages = Item_image::where('item_id',$request->id)->count();
+            if ($itemImages == 3) {
+                $data['status'] = false;
+                $data['message'] = 'you can upload only 3 images';
+                return $data;
+            }
+
             $image = $request->file('images');
             $imgeName = ItemRepo::imageHandle($image,$destinationPath);
             $data['image'] = Item_image::create([
                 'imageName' =>$imgeName,
                 'item_id'   =>$request->id
             ]);
-            $data['status'] = true;
         }
         $data['message'] = 'Done';
         return $data;

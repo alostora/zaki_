@@ -1,62 +1,49 @@
 <div class="modal fade" id="items{{$dat->id}}" style="display: none;">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
-                <h4 class="modal-title">Order items details</h4>
+                <h4 class="modal-title">@lang('items.items_details')</h4>
             </div>
             <div class="modal-body">
-                <div class="box-body" id="box-body">
-
-
-                    @if( isset($dat->order_items) && count($dat->order_items))
+                @if( isset($dat->order_items) && count($dat->order_items))
+                    @foreach($dat->order_items as $item)
                         
-                        @foreach($dat->order_items as $item)
-                            <div class="alert alert-default">
-                                <div class="alert col-md-4">
-                                    @lang('item.itemName')
-                                </div>
-                                <div class="alert col-md-8">
+                        <div class="box box-solid box-info">
+                            <div class="box-header with-border">
+                                <i class="fa fa-cart-plus text-default"></i>
+                                <h3 class="box-title">
                                     {{$item->item_colors_sizes->name}}
                                     {{$item->item_colors_sizes->color}}
                                     {{$item->item_colors_sizes->size}}
-                                </div>
-                            
-                                <div class="alert col-md-4">
-                                    @lang('item.item_count')
-                                </div>
-                                <div class="alert col-md-8">
-                                    {{$item->item_count}}
-                                </div>
-                            
-                                <div class="alert col-md-4">
-                                    @lang('item.itemPrice')
-                                </div>
-                                <div class="alert col-md-8">
-                                    {{$item->item_colors_sizes->itemPrice}}
-                                </div>
-                           
-                                <div class="alert col-md-4">
-                                    @lang('item.totalPrice')
-                                </div>
-                                <div class="alert col-md-8">
-                                    {{$item->item_colors_sizes->itemPrice * $item->item_count}}
-                                </div>
+                                </h3>
                             </div>
-                        @endforeach
-                    @endif
+                            <div class="box-body">
+                                <dl class="dl-horizontal">
 
+                                    <dt style="font-size:18px;">@lang('item.item_count')</dt>
+                                    <dd style="font-size:18px;">
+                                        {{$item->item_count}}
+                                    </dd>
 
+                                    <dt style="font-size:18px;">@lang('item.itemPrice')</dt>
+                                    <dd style="font-size:18px;">
+                                        {{$item->item_colors_sizes->itemPrice}}
+                                    </dd>
+                                    <hr>
+                                    <dt style="font-size:18px;">@lang('item.totalPrice')</dt>
+                                    <dd style="font-size:18px;font-weight: bold;">
+                                        {{$item->item_colors_sizes->itemPrice * $item->item_count}}
+                                    </dd>
 
-
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-dismiss="modal">Ok</button>
-                </div>
-
+                                </dl>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
             </div>
         </div>
     </div>

@@ -49,6 +49,7 @@ class Item extends Model
         'category',
         'sub_category',
         //'images',
+        'image_url',
         'operations',
         'item_colors_sizes',
     ];
@@ -92,6 +93,15 @@ class Item extends Model
     public function getImagesAttribute($value){
         $images = Item_image::where('item_id',$this->id)->get()->makeHidden(['image_url','operations']);
         return $images;
+    }
+
+
+
+
+    public function getImageUrlAttribute($value){
+        $image = Item_image::where('item_id',$this->id)->first();
+        $image = !empty($image) ? $image->image_url : false;
+        return $image;
     }
 
 
