@@ -25,11 +25,17 @@ class AdminUpdateRequest extends FormRequest
     public function rules(Request $request)
     {
         return [
+
             "id" => "nullable|integer",
+
             "name" => "required|string|max:100",
-            'email' => 'required|unique:admins,email,'.$request->id.'|max:100',
+
+            'email' => 'required|unique:admins,email,' . $request->id . '|max:100',
+
             'password' => 'max:100',
+
             'confirmPassword' => 'same:password',
+
             'permission_id' => 'required|integer',
         ];
     }

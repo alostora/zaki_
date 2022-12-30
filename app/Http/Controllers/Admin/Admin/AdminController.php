@@ -8,6 +8,7 @@ use App\Helpers\Repo\Admin\Admin\AdminCreateRepo;
 use App\Helpers\Repo\Admin\Admin\AdminSearchRepo;
 use App\Helpers\Repo\Admin\Admin\AdminUpdateRepo;
 use App\Http\Requests\Admin\Admin\AdminCreateRequest;
+use App\Http\Requests\Admin\Admin\AdminUpdateRequest;
 use App\Models\Admin;
 use App\Models\Permission;
 
@@ -33,7 +34,7 @@ class AdminController extends Controller
         return view('Admin/Admin/edit', $data);
     }
 
-    public function update(AdminCreateRequest $request, Admin $admin)
+    public function update(AdminUpdateRequest $request, Admin $admin)
     {
 
         $adminUpdateRepo = new AdminUpdateRepo();

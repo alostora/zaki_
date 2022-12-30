@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Admin\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Request;
 
 class AdminCreateRequest extends FormRequest
 {
@@ -22,14 +21,20 @@ class AdminCreateRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules(Request $request)
+    public function rules()
     {
         return [
+
             "id" => "nullable|integer",
+
             "name" => "required|string|max:100",
-            'email' => 'required|unique:admins,email,'.$request->id.'|max:100',
-            'password' => 'max:100',
+
+            'email' => 'required|unique:admins,email|max:100',
+
+            'password' => 'required|max:100',
+
             'confirmPassword' => 'same:password',
+
             'permission_id' => 'required|integer',
         ];
     }

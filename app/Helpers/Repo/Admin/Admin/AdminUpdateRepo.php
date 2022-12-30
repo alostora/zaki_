@@ -10,9 +10,7 @@ class AdminUpdateRepo extends AdminRepo
      public function updateAdmin($request, Admin $admin)
      {
 
-          $validated = $request->validated();
-
-          unset($validated['confirmPassword']);
+          $validated = $request->except(['_token','confirmPassword']);
 
           if (empty($validated['password'])) {
 
