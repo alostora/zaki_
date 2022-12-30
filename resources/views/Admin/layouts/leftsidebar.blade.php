@@ -28,7 +28,7 @@
                 <ul class="treeview-menu">
 
                     <li>
-                        <a href="{{url('admin/Admin/adminInfo')}}" id="Admin">
+                        <a href="{{url('admin/Admin/admins')}}" id="Admin">
                             <i class="fa fa-user-md"></i>@lang('leftsidebar.Admins')
                         </a>
                     </li>

@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Helpers\Repo\Admin\CountryRepo;
 use App\Models\Country;
-use File;
-use Lang;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Lang;
 
 class Countries extends Controller
 {

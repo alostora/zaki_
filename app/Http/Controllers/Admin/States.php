@@ -5,11 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Helpers\Repo\Admin\StateRepo;
-use App\Helpers\Repo\Admin\CityRepo;
 use App\Models\State;
 use App\Models\City;
 use App\Models\Country;
-use Lang;
+use Illuminate\Support\Facades\Lang;
 
 class States extends Controller
 {

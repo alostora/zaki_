@@ -2,6 +2,9 @@
 
 namespace App\Observers;
 use App\Models\Vendor;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Str;
 
 class VendorObserver
 {
@@ -13,11 +16,11 @@ class VendorObserver
      */
     public function created(Vendor $vendor)
     {
-        $vendor->password = \Hash::make($vendor->password);
-        $vendor->api_token = \Str::random(50);
+        $vendor->password = Hash::make($vendor->password);
+        $vendor->api_token = Str::random(50);
         $vendor->save();
 
-        $vendor->image = \URL::to('uploads/users/defaultLogo.png');
+        $vendor->image = URL::to('uploads/users/defaultLogo.png');
     }
 
     /**

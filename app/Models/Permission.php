@@ -8,39 +8,48 @@ use Illuminate\Database\Eloquent\Model;
 class Permission extends Model
 {
     use HasFactory;
+
     protected $table = 'permissions';
+
     protected $fillable = [
+
         'permissionName',
+
         'permissionNameAr'
 
     ];
 
-
     protected $hidden = [
+
         'permissionName',
+
         'permissionNameAr',
+
         'created_at',
+
         'updated_at',
     ];
 
-
-
     protected $appends = [
+
         'name',
+
         'operations',
     ];
 
+    public function getNameAttribute($value)
+    {
 
-
-    public function getNameAttribute($value){
         return app()->getLocale() == 'ar' ? $this->permissionName : $this->permissionNameAr;
     }
 
-
-    public function getOperationsAttribute($value){
+    public function getOperationsAttribute($value)
+    {
         return [
-            "edit" => url('admin/Permission/viewCreatePermission/'.$this->id),
-            "delete" => url('admin/Permission/deletePermission/'.$this->id),
+
+            "edit" => url('admin/Permission/viewCreatePermission/' . $this->id),
+
+            "delete" => url('admin/Permission/deletePermission/' . $this->id),
         ];
     }
 }

@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Helpers\Repo\Admin\UserRepo;
 use App\Models\User;
-use Lang;
 
 class Users extends Controller
 {

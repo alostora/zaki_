@@ -5,11 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Helpers\Repo\Admin\S_categoryRepo;
-use App\Helpers\Repo\Admin\CategoryRepo;
 use App\Models\S_category;
 use App\Models\Category;
-use File;
-use Lang;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Lang;
 
 class S_categories extends Controller
 {

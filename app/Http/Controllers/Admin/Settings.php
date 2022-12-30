@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Setting;
 use App\Helpers\Repo\Admin\SettingRepo;
-use File;
-use Lang;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Lang;
 
 class Settings extends Controller
 {

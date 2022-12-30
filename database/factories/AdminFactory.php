@@ -3,6 +3,9 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+
 
 class AdminFactory extends Factory
 {
@@ -16,8 +19,8 @@ class AdminFactory extends Factory
         return [
             'name' => 'hosam zaki',
             'email' => 'dolsika5762@gmail.com',
-            'password' => \Hash::make(123456), // password
-            'remember_token' => \Str::random(10),
+            'password' => Hash::make(123456), // password
+            'remember_token' => Str::random(10),
         ];
     }
 }

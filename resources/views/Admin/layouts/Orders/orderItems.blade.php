@@ -83,7 +83,7 @@
                     </a>
                 </div>
             </div>
-            <div class="box-body" style="">
+            <div class="box-body">
                 <div class="form-group">
                     <label for="item_color_id" class="col-sm-2 control-label">
                         @lang('order.item_color_id')

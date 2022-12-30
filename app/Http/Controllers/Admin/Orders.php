@@ -12,6 +12,8 @@ use App\Models\Item_color;
 use App\Models\User;
 use App\Models\Country;
 use App\Models\City;
+use Illuminate\Support\Str;
+
 
 class Orders extends Controller
 {
@@ -71,7 +73,7 @@ class Orders extends Controller
 
     public function createOrder(Request $request){
         $data = $request->validate(OrderRepo::OrderCreateValidate($request));
-        $data['orderCode'] = \Str::random(6);
+        $data['orderCode'] = Str::random(6);
         
         unset($data['item_color_id'],$data['item_count']);
 

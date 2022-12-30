@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Helpers\Repo\Admin\SizeRepo;
-use App\Helpers\Repo\Admin\MainTypeRepo;
 use App\Models\Size;
 use App\Models\Main_type;
 

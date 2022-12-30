@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Helpers\Repo\Admin\CityRepo;
 use App\Models\City;
 use App\Models\Country;
-use Lang;
+use Illuminate\Support\Facades\Lang;
 
 class Cities extends Controller
 {

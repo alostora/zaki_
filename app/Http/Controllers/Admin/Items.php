@@ -11,11 +11,10 @@ use App\Models\Category;
 use App\Models\S_category;
 use App\Models\Item_image;
 use App\Models\Size;
-use App\Models\Item_size;
 use App\Models\Item_color;
 use App\Models\Color;
-use File;
-use Lang;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Lang;
 
 class Items extends Controller
 {

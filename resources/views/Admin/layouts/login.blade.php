@@ -41,7 +41,7 @@
   <div class="login-box-body">
     <p class="login-box-msg">@lang('general.login')</p>
 
-    <form action="{{url('admin/doLogin')}}" method="post">
+    <form action="{{url('admin/login')}}" method="post">
       {{ csrf_field() }}
       <div class="form-group has-feedback">
         <input name="email" type="email" class="form-control" placeholder="@lang('general.Email')">

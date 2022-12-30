@@ -25,11 +25,11 @@
       		<thead>
                 <tr>
                   	@if(count($data))
-						@foreach($data[0]->toArray() as $keyy=>$val)
-							<th>@lang($title.'.'.$keyy)</th>
-						@endforeach
-					@endif
-					<th></th>
+					@foreach($data[0]->toArray() as $keyy=>$val)
+						<th>@lang($title.'.'.$keyy)</th>
+					@endforeach
+				@endif
+				<th></th>
                 </tr>
       		</thead>
       		<tbody>
@@ -38,7 +38,7 @@
 						<tr>
 				          	@foreach($dat->toArray() as $keyy=>$val)
 				          		@if($keyy != "operations" && $keyy != "id")
-									<td width=" {{$keyy == 'user' ? '200px' : '50px'}} ">{!! $val !!}</td>
+									<td>{!! $val !!}</td>
 								@elseif($keyy == "id")	
 									<td>{{ $key+1}}</td>
 								@endif
@@ -91,10 +91,6 @@
 		}
 	}
 
-
-
-
-
 	function appendValue(e) {
 		if( $('#'+e.id).is(':checked') ){
 
@@ -113,10 +109,6 @@
 		}
 	}
 
-
-
-
-
 	function deleteAll(){
 		if (confirm('are you sure ?')){
 			var selected = new Array();
@@ -128,9 +120,6 @@
 	}
 
 
-
-
-
 	function showItems(id){
         $("#items"+id).modal('show');
 	    /*if($("#items"+id).hasClass('collapse')){
@@ -139,9 +128,6 @@
 	        $("#items"+id).addClass('collapse');
 	    }*/
 	}
-
-
-
 
 	function changeOrderStatus(orderId){
 
@@ -157,7 +143,6 @@
 		      	}
 		    });
 		}
-
 	}
 
 </script>

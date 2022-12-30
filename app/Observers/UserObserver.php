@@ -3,6 +3,9 @@
 namespace App\Observers;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Str;
 
 class UserObserver
 {
@@ -14,11 +17,11 @@ class UserObserver
      */
     public function created(User $user)
     {
-        $user->password = \Hash::make($user->password);
-        $user->api_token = \Str::random(50);
+        $user->password = Hash::make($user->password);
+        $user->api_token = Str::random(50);
         $user->save();
 
-        $user->image = \URL::to('uploads/users/defaultLogo.png');
+        $user->image = URL::to('uploads/users/defaultLogo.png');
     }
 
     /**

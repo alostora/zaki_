@@ -6,8 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Helpers\Repo\Admin\VendorRepo;
 use App\Models\Vendor;
-use Lang;
-use Hash;
+use Illuminate\Support\Facades\Hash;
 
 class Vendors extends Controller
 {
