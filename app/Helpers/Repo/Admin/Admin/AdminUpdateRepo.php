@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminUpdateRepo extends AdminRepo
 {
-     public function updateAdmin($request, Admin $admin)
+     public static function updateAdmin($request, Admin $admin)
      {
 
           $validated = $request->except(['_token','confirmPassword']);

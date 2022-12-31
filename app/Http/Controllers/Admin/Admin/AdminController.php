@@ -17,9 +17,7 @@ class AdminController extends Controller
 
     public function index(Request $request)
     {
-        $adminSearchRepo = new AdminSearchRepo();
-
-        $data = $adminSearchRepo->searchAllAdmins($request->get('query_string') ?? -1);
+        $data = AdminSearchRepo::searchAllAdmins($request->get('query_string') ?? -1);
 
         return view('Admin/Admin/adminInfo', $data);
     }
@@ -37,9 +35,7 @@ class AdminController extends Controller
     public function update(AdminUpdateRequest $request, Admin $admin)
     {
 
-        $adminUpdateRepo = new AdminUpdateRepo();
-
-        $adminUpdateRepo->updateAdmin($request, $admin);
+        AdminUpdateRepo::updateAdmin($request, $admin);
 
         session()->flash('success', 'Done');
 
@@ -59,9 +55,7 @@ class AdminController extends Controller
     public function store(AdminCreateRequest $request)
     {
 
-        $adminCreateRepo = new AdminCreateRepo();
-
-        $adminCreateRepo->createAdmin($request);
+        AdminCreateRepo::createAdmin($request);
 
         session()->flash('success', 'Done');
 

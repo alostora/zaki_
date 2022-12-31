@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminCreateRepo extends AdminRepo
 {
-     public function createAdmin($request)
+     public static function createAdmin($request)
      {
 
           $validated = $request->validated();

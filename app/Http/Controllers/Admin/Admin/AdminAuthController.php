@@ -32,7 +32,6 @@ class AdminAuthController extends Controller
         return view('Admin/layouts/dashboard', $data);
     }
 
-
     public function logOut()
     {
         auth()->guard('admin')->logout();
