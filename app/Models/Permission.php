@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Permission extends Model
 {
@@ -16,7 +17,6 @@ class Permission extends Model
         'permissionName',
 
         'permissionNameAr'
-
     ];
 
     protected $hidden = [
@@ -37,19 +37,24 @@ class Permission extends Model
         'operations',
     ];
 
-    public function getNameAttribute($value)
+    public function getNameAttribute()
     {
 
         return app()->getLocale() == 'ar' ? $this->permissionName : $this->permissionNameAr;
     }
 
-    public function getOperationsAttribute($value)
+    public function getOperationsAttribute()
     {
         return [
 
-            "edit" => url('admin/Permission/viewCreatePermission/' . $this->id),
+            "edit" => url('admin/Permission/edit/' . $this->id),
 
-            "delete" => url('admin/Permission/deletePermission/' . $this->id),
+            "delete" => url('admin/Permission/delete/' . $this->id),
         ];
+    }
+
+    public function migrationRoles():HasMany
+    {
+        return $this->hasMany(Migration_role::class,'permission_id');
     }
 }

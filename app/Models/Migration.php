@@ -18,10 +18,7 @@ class Migration extends Model
         'name',
     ];
 
-
-
-
-    public function getNameAttribute($value){
+    public function getNameAttribute(){
         $str = $this->migration;
         if (preg_match('/_create_(.*?)_table/', $str, $match) == 1) {
             return $match[1];

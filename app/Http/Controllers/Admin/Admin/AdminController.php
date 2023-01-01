@@ -4,81 +4,46 @@ namespace App\Http\Controllers\Admin\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Helpers\Repo\Admin\Admin\AdminCreateRepo;
-use App\Helpers\Repo\Admin\Admin\AdminSearchRepo;
-use App\Helpers\Repo\Admin\Admin\AdminUpdateRepo;
+use App\Helpers\Repo\Admin\Admin\AdminRepo;
 use App\Http\Requests\Admin\Admin\AdminCreateRequest;
 use App\Http\Requests\Admin\Admin\AdminUpdateRequest;
 use App\Models\Admin;
-use App\Models\Permission;
 
 class AdminController extends Controller
 {
 
     public function index(Request $request)
     {
-        $data = AdminSearchRepo::searchAllAdmins($request->get('query_string') ?? -1);
-
-        return view('Admin/Admin/adminInfo', $data);
+        return AdminRepo::get($request->get('query_string') ?? -1);
     }
 
-    public function edit(Admin $admin)
+    public function create()
     {
-
-        $data['data'] = $admin;
-
-        $data['permissions'] = Permission::get();
-
-        return view('Admin/Admin/edit', $data);
-    }
-
-    public function update(AdminUpdateRequest $request, Admin $admin)
-    {
-
-        AdminUpdateRepo::updateAdmin($request, $admin);
-
-        session()->flash('success', 'Done');
-
-        return back();
-    }
-
-    public function create(Admin $admin)
-    {
-
-        $data['data'] = $admin;
-
-        $data['permissions'] = Permission::get();
-
-        return view('Admin/Admin/create', $data);
+        return AdminRepo::create();
     }
 
     public function store(AdminCreateRequest $request)
     {
+        return AdminRepo::store($request);
+    }
 
-        AdminCreateRepo::createAdmin($request);
+    public function edit(Admin $admin)
+    {
+        return AdminRepo::edit($admin);
+    }
 
-        session()->flash('success', 'Done');
-
-        return back();
+    public function update(AdminUpdateRequest $request, Admin $admin)
+    {
+        return AdminRepo::update($request,$admin);
     }
 
     public function destroy(Admin $admin)
     {
-        $admin->delete();
-
-        session()->flash('warning', 'Done');
-
-        return back();
+        return AdminRepo::destroy($admin);
     }
 
-    public function deleteManyAdmins($ids)
+    public function destroyMany($ids)
     {
-        $ids = json_decode($ids);
-
-        Admin::destroy($ids);
-
-        session()->flash('warning', 'Done');
-
-        return back();
+        return AdminRepo::destroyMany($ids);
     }
 }

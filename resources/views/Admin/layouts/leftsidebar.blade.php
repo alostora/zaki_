@@ -28,7 +28,7 @@
                 <ul class="treeview-menu">
 
                     <li>
-                        <a href="{{url('admin/Admin/admins')}}" id="Admin">
+                        <a href="{{url('admin/Admin')}}" id="Admin">
                             <i class="fa fa-user-md"></i>@lang('leftsidebar.Admins')
                         </a>
                     </li>
@@ -40,7 +40,7 @@
                     </li>
 
                     <li>
-                        <a href="{{url('admin/Permission/permissionsInfo')}}" id="Permission">
+                        <a href="{{url('admin/Permission')}}" id="Permission">
                             <i class="fa fa-hand-rock-o"></i>@lang('leftsidebar.Permissions')
                         </a>
                     </li>
