@@ -34,7 +34,7 @@
                     </li>
 
                     <li>
-                        <a href="{{url('admin/Role/rolesInfo')}}" id="Role">
+                        <a href="{{url('admin/Role')}}" id="Role">
                             <i class="fa fa-flash"></i>@lang('leftsidebar.Roles')
                         </a>
                     </li>
@@ -46,13 +46,13 @@
                     </li>
 
                     <li>
-                        <a href="{{url('admin/User/userInfo')}}" id="User">
+                        <a href="{{url('admin/User')}}" id="User">
                             <i class="fa fa-users"></i>@lang('leftsidebar.Users')
                         </a>
                     </li>
 
                     <li>
-                        <a href="{{url('admin/Main_type/mainTypesInfo')}}" id="Main_type">
+                        <a href="{{url('admin/MainType')}}" id="MainType">
                             <i class="fa fa-magic"></i>@lang('leftsidebar.MainTypes')
                         </a>
                     </li>
@@ -70,13 +70,13 @@
                     </li>
 
                     <li>
-                        <a href="{{url('admin/Size/sizesInfo')}}" id="Size">
+                        <a href="{{url('admin/Size')}}" id="Size">
                             <i class="fa fa-gg-circle"></i>@lang('leftsidebar.Sizes')
                         </a>
                     </li>
 
                     <li>
-                        <a href="{{url('admin/Measur_unit/measurUnitsInfo')}}" id="Measur_unit">
+                        <a href="{{url('admin/MeasureUnit')}}" id="MeasureUnit">
                             <i class="fa fa-balance-scale"></i>@lang('leftsidebar.MeasurUnits')
                         </a>
                     </li>
@@ -124,7 +124,7 @@
                     </li>
 
                     <li>
-                        <a href="{{url('admin/Vendor/vendorInfo')}}" id="Vendor">
+                        <a href="{{url('admin/Vendor')}}" id="Vendor">
                             <i class="fa fa-gift"></i>@lang('leftsidebar.Vendors')
                         </a>
                     </li>

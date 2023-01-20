@@ -53,33 +53,26 @@ class Vendor extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-
-
     protected $appends = [
         'image_url',
         'image_path',
         'operations'
     ];
 
-
-
     public function getImageUrlAttribute($value){
         $image = url('uploads/vendors/'.$this->image);
         return '<img src="'.$image.'" class="table-image">';
     }
 
-
     public function getImagePathAttribute($value){
         return url('uploads/vendors/'.$this->image);
     }
 
-
-
     public function getOperationsAttribute($value){
 
         return [
-            "edit" => url('admin/Vendor/viewCreateVendor/'.$this->id),
-            "delete" => url('admin/Vendor/deleteVendor/'.$this->id),
+            "edit" => url('admin/Vendor/edit/'.$this->id),
+            "delete" => url('admin/Vendor/delete/'.$this->id),
         ];
     }
 

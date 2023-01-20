@@ -31,7 +31,7 @@ class AdminRepo extends Repo implements RepoInterface
                'deletePath' => url(self::$deletePath),
           ];
 
-          return view('Admin/Admin/adminInfo', $data);
+          return view('Admin/Admin/adminsInfo', $data);
      }
 
      public static function show($admin)

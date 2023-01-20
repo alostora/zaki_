@@ -1,5 +1,5 @@
 <div class="box-header with-border">
-    <h3 class="box-title">@if(empty($data)) @lang('general.add') @else @lang('general.edit') @endif</h3>
+    <h3 class="box-title">@lang('general.edit')</h3>
 </div>
 <form class="form-horizontal" action="{{url('admin/Permission/update/'.$data->id)}}" method="post">
     <div class="box-body">
@@ -12,12 +12,12 @@
             
             <label for="permissionName" class="col-sm-2 control-label">@lang('permission.permissionName')</label>
             <div class="col-sm-4">
-                <input type="text" name="permissionName" class="form-control" id="permissionName" placeholder="@lang('permission.permissionName')" value="{{(!empty($data)) ? $data->permissionName :''}}" required>
+                <input type="text" name="permissionName" class="form-control" id="permissionName" placeholder="@lang('permission.permissionName')" value="{{$data->permissionName}}" required>
             </div>
           
             <label for="permissionNameAr" class="col-sm-2 control-label">@lang('permission.permissionNameAr')</label>
             <div class="col-sm-4">
-                <input type="text" name="permissionNameAr" class="form-control" placeholder="@lang('permission.permissionNameAr')" value="{{(!empty($data)) ? $data->permissionNameAr :''}}" required id="permissionNameAr">
+                <input type="text" name="permissionNameAr" class="form-control" placeholder="@lang('permission.permissionNameAr')" value="{{$data->permissionNameAr}}" required id="permissionNameAr">
             </div>
 
         </div>
@@ -52,6 +52,6 @@
         
     </div>
     <div class="box-footer">
-        <input type="submit" class="btn btn-info" value="{{empty($data) ? Lang::get('general.add') : Lang::get('general.edit')}}">
+        <input type="submit" class="btn btn-info" value="@lang('general.edit')">
     </div>
 </form>

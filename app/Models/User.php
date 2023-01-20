@@ -60,12 +60,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-
-
-
-
-
-
     protected $appends = [
         'image_url',
         'image_path',
@@ -76,33 +70,38 @@ class User extends Authenticatable
 
 
 
-    public function getImageUrlAttribute($value){
+    public function getImageUrlAttribute(){
         $image = url('uploads/users/'.$this->image);
         return '<img src="'.$image.'" class="table-image">';
     }
 
 
-    public function getImagePathAttribute($value){
+    public function getImagePathAttribute(){
         return url('uploads/users/'.$this->image);
     }
 
 
-    public function getCountryAttribute($value){
-        return Country::find($this->country_id)->name;
+    public function getCountryAttribute(){
+
+        $country = Country::find($this->country_id);
+
+        return $country ? $country->name : null;
     }
 
 
-    public function getCityAttribute($value){
-        return City::find($this->city_id)->name;
+    public function getCityAttribute(){
+        $city = City::find($this->city_id);
+
+        return $city ? $city->name : null;
     }
 
 
 
-    public function getOperationsAttribute($value){
+    public function getOperationsAttribute(){
 
         return [
-            "edit" => url('admin/User/viewCreateUser/'.$this->id),
-            "delete" => url('admin/User/deleteUser/'.$this->id),
+            "edit" => url('admin/User/edit/'.$this->id),
+            "delete" => url('admin/User/delete/'.$this->id),
         ];
     }
 
