@@ -58,14 +58,14 @@
                     </li>
 
                     <li>
-                        <a href="{{url('admin/Category/categoriesInfo')}}" id="Category">
+                        <a href="{{url('admin/Category')}}" id="Category">
                             <i class="fa fa-th"></i>@lang('leftsidebar.Categories')
                         </a>
                     </li>
 
                     <li>
-                        <a href="{{url('admin/S_category/s_categoriesInfo')}}" id="S_category">
-                            <i class="fa fa-reorder"></i>@lang('leftsidebar.S_categories')
+                        <a href="{{url('admin/SubCategory')}}" id="SubCategory">
+                            <i class="fa fa-reorder"></i>@lang('leftsidebar.SubCategories')
                         </a>
                     </li>
 
@@ -82,13 +82,13 @@
                     </li>
 
                     <li>
-                        <a href="{{url('admin/Setting/generalSetting')}}" id="Setting">
+                        <a href="{{url('admin/Setting')}}" id="Setting">
                             <i class="fa fa-cogs"></i>@lang('leftsidebar.Setting')
                         </a>
                     </li>
 
                     <li>
-                        <a href="{{url('admin/Country/countriesInfo')}}" id="Country">
+                        <a href="{{url('admin/Country')}}" id="Country">
                             <i class="fa fa-flag-checkered"></i>@lang('leftsidebar.Countries')
                         </a>
                     </li>

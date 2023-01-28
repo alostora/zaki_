@@ -3,20 +3,22 @@
 use App\Http\Controllers\Admin\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\Admin\AdminController;
 use App\Http\Controllers\Admin\Brands;
-use App\Http\Controllers\Admin\Categories;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\Cities;
 use App\Http\Controllers\Admin\Colors;
 use App\Http\Controllers\Admin\Countries;
+use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\Items;
 use App\Http\Controllers\Admin\MainTypeController;
 use App\Http\Controllers\Admin\MeasureUnitController;
 use App\Http\Controllers\Admin\Orders;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
-use App\Http\Controllers\Admin\S_categories;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\Settings;
 use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\States;
+use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\VendorController;
 use Illuminate\Support\Facades\Lang;
@@ -186,40 +188,76 @@ Route::group(['prefix' => 'admin', 'middleware' => 'lang'], function () {
 			Route::get('destroyMany/{ids}', [MeasureUnitController::class, 'destroyMany'])->middleware('permissions:Permission,delete');
 		});
 
-		//categories
+		//measure_unets
 		Route::group(['prefix' => 'Category'], function () {
-			Route::get('categoriesInfo', [Categories::class, 'categoriesInfo'])->middleware('permissions:Category,view');
-			Route::get('viewCreateCategory/{id?}', [Categories::class, 'viewCreateCategory'])->middleware('permissions:Category,create');
-			Route::post('createCategory', [Categories::class, 'createCategory'])->middleware('permissions:Category,create');
-			Route::get('deleteCategory/{id}', [Categories::class, 'deleteCategory'])->middleware('permissions:Category,delete');
-			Route::get('deleteManyCategories/{ids}', [Categories::class, 'deleteManyCategories'])->middleware('permissions:Category,delete');
+
+			Route::get('/', [CategoryController::class, 'index'])->middleware('permissions:Permission,view');
+
+			Route::get('create', [CategoryController::class, 'create'])->middleware('permissions:Permission,create');
+
+			Route::post('store', [CategoryController::class, 'store'])->middleware('permissions:Permission,create');
+
+			Route::get('edit/{category}', [CategoryController::class, 'edit'])->middleware('permissions:Permission,create');
+
+			Route::patch('update/{category}', [CategoryController::class, 'update'])->middleware('permissions:Permission,create');
+
+			Route::get('delete/{category}', [CategoryController::class, 'destroy'])->middleware('permissions:Permission,delete');
+
+			Route::get('destroyMany/{ids}', [CategoryController::class, 'destroyMany'])->middleware('permissions:Permission,delete');
 		});
 
 		//sub categories
-		Route::group(['prefix' => 'S_category'], function () {
-			Route::get('s_categoriesInfo', [S_categories::class, 's_categoriesInfo'])->middleware('permissions:S_category,view');
-			Route::get('viewCreateS_category/{id?}', [S_categories::class, 'viewCreateS_category'])->middleware('permissions:S_category,create');
-			Route::post('createS_category', [S_categories::class, 'createS_category'])->middleware('permissions:S_category,create');
-			Route::get('deleteS_category/{id}', [S_categories::class, 'deleteS_category'])->middleware('permissions:S_category,delete');
-			Route::get('deleteManyS_categories/{ids}', [S_categories::class, 'deleteManyS_categories'])->middleware('permissions:S_category,delete');
+		Route::group(['prefix' => 'SubCategory'], function () {
+
+			Route::get('/', [SubCategoryController::class, 'index'])->middleware('permissions:Permission,view');
+
+			Route::get('create', [SubCategoryController::class, 'create'])->middleware('permissions:Permission,create');
+
+			Route::post('store', [SubCategoryController::class, 'store'])->middleware('permissions:Permission,create');
+
+			Route::get('edit/{subCategory}', [SubCategoryController::class, 'edit'])->middleware('permissions:Permission,create');
+
+			Route::patch('update/{subCategory}', [SubCategoryController::class, 'update'])->middleware('permissions:Permission,create');
+
+			Route::get('delete/{subCategory}', [SubCategoryController::class, 'destroy'])->middleware('permissions:Permission,delete');
+
+			Route::get('destroyMany/{ids}', [SubCategoryController::class, 'destroyMany'])->middleware('permissions:Permission,delete');
 		});
 
 		//generalSetting
 		Route::group(['prefix' => 'Setting'], function () {
-			Route::get('generalSetting', [Settings::class, 'generalSetting'])->middleware('permissions:Setting,view');
-			Route::get('viewCreateSetting/{id?}', [Settings::class, 'viewCreateSetting'])->middleware('permissions:Setting,create');
-			Route::post('createSetting', [Settings::class, 'createSetting'])->middleware('permissions:Setting,create');
-			Route::get('deleteSetting/{id}', [Settings::class, 'deleteSetting'])->middleware('permissions:Setting,delete');
-			Route::get('deleteManySettings/{ids}', [Settings::class, 'deleteManySettings'])->middleware('permissions:Setting,delete');
+
+			Route::get('/', [SettingController::class, 'index'])->middleware('permissions:Permission,view');
+
+			Route::get('create', [SettingController::class, 'create'])->middleware('permissions:Permission,create');
+
+			Route::post('store', [SettingController::class, 'store'])->middleware('permissions:Permission,create');
+
+			Route::get('edit/{setting}', [SettingController::class, 'edit'])->middleware('permissions:Permission,create');
+
+			Route::patch('update/{setting}', [SettingController::class, 'update'])->middleware('permissions:Permission,create');
+
+			Route::get('delete/{setting}', [SettingController::class, 'destroy'])->middleware('permissions:Permission,delete');
+
+			Route::get('destroyMany/{ids}', [SettingController::class, 'destroyMany'])->middleware('permissions:Permission,delete');
 		});
 
 		//countries
 		Route::group(['prefix' => 'Country'], function () {
-			Route::get('countriesInfo', [Countries::class, 'countriesInfo'])->middleware('permissions:Country,view');
-			Route::get('viewCreateCountry/{id?}', [Countries::class, 'viewCreateCountry'])->middleware('permissions:Country,create');
-			Route::post('createCountry', [Countries::class, 'createCountry'])->middleware('permissions:Country,create');
-			Route::get('deleteCountry/{id}', [Countries::class, 'deleteCountry'])->middleware('permissions:Country,delete');
-			Route::get('deleteManyCountries/{ids}', [Countries::class, 'deleteManyCountries'])->middleware('permissions:Country,delete');
+
+			Route::get('/', [CountryController::class, 'index'])->middleware('permissions:Permission,view');
+
+			Route::get('create', [CountryController::class, 'create'])->middleware('permissions:Permission,create');
+
+			Route::post('store', [CountryController::class, 'store'])->middleware('permissions:Permission,create');
+
+			Route::get('edit/{country}', [CountryController::class, 'edit'])->middleware('permissions:Permission,create');
+
+			Route::patch('update/{country}', [CountryController::class, 'update'])->middleware('permissions:Permission,create');
+
+			Route::get('delete/{country}', [CountryController::class, 'destroy'])->middleware('permissions:Permission,delete');
+
+			Route::get('destroyMany/{ids}', [CountryController::class, 'destroyMany'])->middleware('permissions:Permission,delete');
 		});
 
 		//cities

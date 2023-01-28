@@ -12,7 +12,7 @@ return [
 	'Cities' => 'Cities',
 	'States' => 'States',
 	'Brands' => 'Brands',
-	'S_categories' => 'Sub categories',
+	'SubCategories' => 'Sub categories',
 	'Colors' => 'Colors',
 	'Sizes' => 'Sizes',
 	'MeasurUnits' => 'Measur units',
@@ -21,7 +21,7 @@ return [
 	'Vendors' => 'Vendors',
 	'Permissions' => 'Permissions',
 	'Roles' => 'Roles',
-    'Orders' => 'Orders',
+	'Orders' => 'Orders',
 
 
 ];
