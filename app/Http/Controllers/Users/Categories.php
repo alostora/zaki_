@@ -3,18 +3,27 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
-use App\Models\Main_type;
 use App\Models\Category;
-use App\Models\S_category;
 use App\Models\Item;
-
+use App\Models\MainType;
+use App\Models\SubCategory;
 
 class Categories extends Controller
 {
 
 
   public function mainTyps(){
-    $types = Main_type::get();
+
+    $type = isset($_GET['type']) ? $_GET['type'] : null;
+
+
+
+    $types = MainType::where(function($q) use ($type){
+      if($type != null){
+
+        $q->where('typeName',$type);
+      }
+    })->get();
     $data['status'] = true;
     $data['types'] = $types->makeHidden('operations');
     return $data;
@@ -36,7 +45,7 @@ class Categories extends Controller
 
 
   public function subCategories($cat_id){
-    $categories = S_category::where('cat_id',$cat_id)->get();
+    $categories = SubCategory::where('category_id',$cat_id)->get();
     $data['status'] = true;
     $data['sub_categories'] = $categories->makeHidden(['image_url','operations'])->makeVisible('image_path');
     return $data;
