@@ -94,13 +94,13 @@
                     </li>
 
                     <li>
-                        <a href="{{url('admin/City/citiesInfo')}}" id="City">
+                        <a href="{{url('admin/City')}}" id="City">
                             <i class="fa fa-flag-o"></i>@lang('leftsidebar.Cities')
                         </a>
                     </li>
 
                     <li>
-                        <a href="{{url('admin/State/statesInfo')}}" id="State">
+                        <a href="{{url('admin/State')}}" id="State">
                             <i class="fa fa-flag"></i>@lang('leftsidebar.States')
                         </a>
                     </li>

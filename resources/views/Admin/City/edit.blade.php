@@ -2,6 +2,6 @@
 @include('Admin/layouts/mainheader')
 @include('Admin/layouts/leftsidebar')
     @include('Admin/layouts/mainContainerTop')
-        @include('Admin/layouts/States/viewCreateState') 
+        @include('Admin/layouts/City/edit')
     @include('Admin/layouts/mainContainerBottom')
 @include('Admin/layouts/footer')

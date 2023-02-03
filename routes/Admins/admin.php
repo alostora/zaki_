@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\Admin\AdminController;
 use App\Http\Controllers\Admin\Brands;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\Cities;
+use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\Colors;
 use App\Http\Controllers\Admin\Countries;
 use App\Http\Controllers\Admin\CountryController;
@@ -17,6 +18,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\Settings;
 use App\Http\Controllers\Admin\SizeController;
+use App\Http\Controllers\Admin\StateController;
 use App\Http\Controllers\Admin\States;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\UserController;
@@ -262,22 +264,40 @@ Route::group(['prefix' => 'admin', 'middleware' => 'lang'], function () {
 
 		//cities
 		Route::group(['prefix' => 'City'], function () {
-			Route::get('citiesInfo', [Cities::class, 'citiesInfo'])->middleware('permissions:City,view');
-			Route::get('viewCreateCity/{id?}', [Cities::class, 'viewCreateCity'])->middleware('permissions:City,create');
-			Route::post('createCity', [Cities::class, 'createCity'])->middleware('permissions:City,create');
-			Route::get('deleteCity/{id}', [Cities::class, 'deleteCity'])->middleware('permissions:City,delete');
-			Route::get('deleteManyCities/{ids}', [Cities::class, 'deleteManyCities'])->middleware('permissions:City,delete');
+
+			Route::get('/', [CityController::class, 'index'])->middleware('permissions:Permission,view');
+
+			Route::get('country-city/{country}', [CityController::class, 'countryCities'])->middleware('permissions:Permission,view');
+
+			Route::get('create', [CityController::class, 'create'])->middleware('permissions:Permission,create');
+
+			Route::post('store', [CityController::class, 'store'])->middleware('permissions:Permission,create');
+
+			Route::get('edit/{city}', [CityController::class, 'edit'])->middleware('permissions:Permission,create');
+
+			Route::patch('update/{city}', [CityController::class, 'update'])->middleware('permissions:Permission,create');
+
+			Route::get('delete/{city}', [CityController::class, 'destroy'])->middleware('permissions:Permission,delete');
+
+			Route::get('destroyMany/{ids}', [CityController::class, 'destroyMany'])->middleware('permissions:Permission,delete');
 		});
 
-		//stats
+		//states
 		Route::group(['prefix' => 'State'], function () {
-			Route::get('statesInfo', [States::class, 'statesInfo'])->middleware('permissions:State,view');
-			Route::get('viewCreateState/{id?}', [States::class, 'viewCreateState'])->middleware('permissions:State,create');
-			Route::post('createState', [States::class, 'createState'])->middleware('permissions:State,create');
-			Route::get('deleteState/{id}', [States::class, 'deleteState'])->middleware('permissions:State,delete');
-			Route::get('deleteManyStates/{ids}', [States::class, 'deleteManyStates'])->middleware('permissions:State,delete');
-			//cities //without permission middleware ajax request
-			Route::get('getCities/{city_id}', [States::class, 'getCities']);
+
+			Route::get('/', [StateController::class, 'index'])->middleware('permissions:Permission,view');
+
+			Route::get('create', [StateController::class, 'create'])->middleware('permissions:Permission,create');
+
+			Route::post('store', [StateController::class, 'store'])->middleware('permissions:Permission,create');
+
+			Route::get('edit/{state}', [StateController::class, 'edit'])->middleware('permissions:Permission,create');
+
+			Route::patch('update/{state}', [StateController::class, 'update'])->middleware('permissions:Permission,create');
+
+			Route::get('delete/{state}', [StateController::class, 'destroy'])->middleware('permissions:Permission,delete');
+
+			Route::get('destroyMany/{ids}', [StateController::class, 'destroyMany'])->middleware('permissions:Permission,delete');
 		});
 
 		//brands

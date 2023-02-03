@@ -53,32 +53,32 @@ class Country extends Model
         'operations'
     ];
 
-    public function getNameAttribute($value)
+    public function getNameAttribute()
     {
         return app()->getLocale() == 'ar' ? $this->countryNameAr : $this->countryName;
     }
 
-    public function getImageUrlAttribute($value)
+    public function getImageUrlAttribute()
     {
         $countryFlag = url('Admin_uploads/countries/' . $this->countryFlag);
         return '<img src="' . $countryFlag . '" class="table-image">';
     }
 
-    public function getImagePathAttribute($value)
+    public function getImagePathAttribute()
     {
         return url('Admin_uploads/countries/' . $this->countryFlag);
-    }
-
-    public function getOperationsAttribute($value)
-    {
-        return [
-            "edit" => url('admin/Country/edit/' . $this->id),
-            "delete" => url('admin/Country/delete/' . $this->id),
-        ];
     }
 
     public function cities(): HasMany
     {
         return $this->hasMany(City::class, 'country_id');
+    }
+
+    public function getOperationsAttribute()
+    {
+        return [
+            "edit" => url('admin/Country/edit/' . $this->id),
+            "delete" => url('admin/Country/delete/' . $this->id),
+        ];
     }
 }
