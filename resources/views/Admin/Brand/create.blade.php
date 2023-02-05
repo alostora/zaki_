@@ -2,6 +2,6 @@
 @include('Admin/layouts/mainheader')
 @include('Admin/layouts/leftsidebar')
     @include('Admin/layouts/mainContainerTop')
-        @include('Admin/layouts/Colors/viewCreateColor')
+        @include('Admin/layouts/Brand/create')
     @include('Admin/layouts/mainContainerBottom')
 @include('Admin/layouts/footer')

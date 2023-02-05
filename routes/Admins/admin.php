@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\Admin\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\Admin\AdminController;
+use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\Brands;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\Cities;
 use App\Http\Controllers\Admin\CityController;
+use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\Colors;
 use App\Http\Controllers\Admin\Countries;
 use App\Http\Controllers\Admin\CountryController;
@@ -302,21 +304,42 @@ Route::group(['prefix' => 'admin', 'middleware' => 'lang'], function () {
 
 		//brands
 		Route::group(['prefix' => 'Brand'], function () {
-			Route::get('brandsInfo', [Brands::class, 'brandsInfo'])->middleware('permissions:Brand,view');
-			Route::get('viewCreateBrand/{id?}', [Brands::class, 'viewCreateBrand'])->middleware('permissions:Brand,create');
-			Route::post('createBrand', [Brands::class, 'createBrand'])->middleware('permissions:Brand,create');
-			Route::get('deleteBrand/{id}', [Brands::class, 'deleteBrand'])->middleware('permissions:Brand,delete');
-			Route::get('deleteManyBrands/{ids}', [Brands::class, 'deleteManyBrands'])->middleware('permissions:Brand,delete');
-		});
 
+			Route::get('/', [BrandController::class, 'index'])->middleware('permissions:Permission,view');
+
+			Route::get('create', [BrandController::class, 'create'])->middleware('permissions:Permission,create');
+
+			Route::post('store', [BrandController::class, 'store'])->middleware('permissions:Permission,create');
+
+			Route::get('edit/{brand}', [BrandController::class, 'edit'])->middleware('permissions:Permission,create');
+
+			Route::patch('update/{brand}', [BrandController::class, 'update'])->middleware('permissions:Permission,create');
+
+			Route::get('delete/{brand}', [BrandController::class, 'destroy'])->middleware('permissions:Permission,delete');
+
+			Route::get('destroyMany/{ids}', [BrandController::class, 'destroyMany'])->middleware('permissions:Permission,delete');
+			
+		});
+		
 		//colors
 		Route::group(['prefix' => 'Color'], function () {
-			Route::get('colorsInfo', [Colors::class, 'colorsInfo'])->middleware('permissions:Color,view');
-			Route::get('viewCreateColor/{id?}', [Colors::class, 'viewCreateColor'])->middleware('permissions:Color,create');
-			Route::post('createColor', [Colors::class, 'createColor'])->middleware('permissions:Color,create');
-			Route::get('deleteColor/{id}', [Colors::class, 'deleteColor'])->middleware('permissions:Color,delete');
-			Route::get('deleteManyColors/{ids}', [Colors::class, 'deleteManyColors'])->middleware('permissions:Color,delete');
+
+			Route::get('/', [ColorController::class, 'index'])->middleware('permissions:Permission,view');
+
+			Route::get('create', [ColorController::class, 'create'])->middleware('permissions:Permission,create');
+
+			Route::post('store', [ColorController::class, 'store'])->middleware('permissions:Permission,create');
+
+			Route::get('edit/{color}', [ColorController::class, 'edit'])->middleware('permissions:Permission,create');
+
+			Route::patch('update/{color}', [ColorController::class, 'update'])->middleware('permissions:Permission,create');
+
+			Route::get('delete/{color}', [ColorController::class, 'destroy'])->middleware('permissions:Permission,delete');
+
+			Route::get('destroyMany/{ids}', [ColorController::class, 'destroyMany'])->middleware('permissions:Permission,delete');
+			
 		});
+		
 
 		//items
 		Route::group(['prefix' => 'Item'], function () {
@@ -325,6 +348,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'lang'], function () {
 			Route::post('createItem', [Items::class, 'createItem'])->middleware('permissions:Item,create');
 			Route::get('deleteItem/{id}', [Items::class, 'deleteItem'])->middleware('permissions:Item,delete');
 			Route::get('deleteManyItems/{ids}', [Items::class, 'deleteManyItems'])->middleware('permissions:Item,delete');
+			
 			//item_images
 			Route::post('createItemImages', [Items::class, 'createItemImages'])->middleware('permissions:Item_image,create');
 			Route::get('removedFile/{id}', [Items::class, 'removedFile'])->middleware('permissions:Item_image,delete');

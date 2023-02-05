@@ -8,50 +8,57 @@ use Illuminate\Database\Eloquent\Model;
 class Color extends Model
 {
     use HasFactory;
+
     protected $table = 'colors';
+
     protected $fillable = [
+
         "colorName",
+
         "colorNameAr",
+
         "colorCode",
     ];
 
-
-
     protected $hidden = [
+
         'colorName',
+
         'colorNameAr',
+
         'colorCode',
+
         'updated_at',
+
         'created_at'
     ];
 
     protected $appends = [
+
         'name',
+
         'code',
+
         'operations'
     ];
 
-
-
-
-    public function getNameAttribute($value){
+    public function getNameAttribute()
+    {
         return app()->getLocale() == 'ar' ? $this->colorNameAr : $this->colorName;
     }
 
 
-    public function getCodeAttribute($value){
-        return '<label class="colorCode" style="background-color:'.$this->colorCode.'"></label>';
+    public function getCodeAttribute()
+    {
+        return '<label class="colorCode" style="background-color:' . $this->colorCode . '"></label>';
     }
 
-
-
-    public function getOperationsAttribute($value){
+    public function getOperationsAttribute()
+    {
 
         return [
-            "edit" => url('admin/Color/viewCreateColor/'.$this->id),
-            "delete" => url('admin/Color/deleteColor/'.$this->id),
+            "edit" => url('admin/Color/edit/' . $this->id),
+            "delete" => url('admin/Color/delete/' . $this->id),
         ];
     }
-
-
 }

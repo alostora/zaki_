@@ -106,13 +106,13 @@
                     </li>
 
                     <li>
-                        <a href="{{url('admin/Brand/brandsInfo')}}" id="Brand">
+                        <a href="{{url('admin/Brand')}}" id="Brand">
                             <i class="fa fa-heart-o"></i>@lang('leftsidebar.Brands')
                         </a>
                     </li>
 
                     <li>
-                        <a href="{{url('admin/Color/colorsInfo')}}" id="Color">
+                        <a href="{{url('admin/Color')}}" id="Color">
                             <i class="fa fa-circle-o"></i>@lang('leftsidebar.Colors')
                         </a>
                     </li>
