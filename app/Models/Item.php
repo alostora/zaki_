@@ -4,130 +4,128 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Item extends Model
 {
     use HasFactory;
+
     protected $table = 'items';
+
     protected $fillable = [
+
         'itemName',
+
         'itemNameAr',
+
         'itemDesc',
+
         'itemDescAr',
+
         'itemPrice',
+
         'itemCount',
+
         'itemDiscount',
+
         'active',
-        'cat_id',
-        'sub_cat_id',
+
+        "main_type_id",
+
+        'category_id',
+
+        'sub_category_id',
+
         'country_id',
-        "type_id",//same size type in sizes & category table
-        
+
     ];
 
-
-
     protected $hidden = [
+
         'itemName',
+
         'itemNameAr',
+
         'itemDesc',
+
         'itemDescAr',
-        'cat_id',
-        'sub_cat_id',
+
+        'category_id',
+
+        'sub_category_id',
+
         'country_id',
-        'type_id',
+
+        'main_type_id',
+
         'updated_at',
+
         'created_at',
+
         'item_colors_sizes'
     ];
 
-
     protected $appends = [
+
         'name',
+
         'desc',
+
         'country',
+
         'category',
+
         'sub_category',
-        //'images',
-        'image_url',
+
         'operations',
-        'item_colors_sizes',
     ];
 
-
-
-    public function getNameAttribute($value){
+    public function getNameAttribute()
+    {
         return $this->itemName;
     }
 
-
-    public function getDescAttribute($value){
+    public function getDescAttribute()
+    {
         return $this->itemDesc;
     }
 
-
-    public function getCountryAttribute($value){
+    public function getCountryAttribute()
+    {
         $country = Country::find($this->country_id);
-        if(!empty($country)){
+        if (!empty($country)) {
             return $country->name;
         }
     }
 
-    public function getCategoryAttribute($value){
-        $category = Category::find($this->cat_id);
-        if(!empty($category)){
+    public function getCategoryAttribute()
+    {
+        $category = Category::find($this->category_id);
+        if (!empty($category)) {
             return $category->name;
         }
     }
 
-
-    public function getSubCategoryAttribute($value){
-        $s_category = S_category::find($this->sub_cat_id);
-        if(!empty($s_category)){
-            return $s_category->name;
+    public function getSubCategoryAttribute()
+    {
+        $subCategory = SubCategory::find($this->sub_category_id);
+        if (!empty($subCategory)) {
+            return $subCategory->name;
         }
     }
 
-
-
-    public function getImagesAttribute($value){
-        $images = Item_image::where('item_id',$this->id)->get()->makeHidden(['image_url','operations']);
-        return $images;
-    }
-
-
-
-
-    public function getImageUrlAttribute($value){
-        $image = Item_image::where('item_id',$this->id)->first();
-        $image = !empty($image) ? $image->image_url : false;
-        return $image;
-    }
-
-
-
-    public function getItemColorsAttribute($value){
-        $colors = Color::get()->makeHidden(['code','operations'])->makeVisible('colorCode');
-        return $colors;
-    }
-
-
-
-    public function getOperationsAttribute($value){
+    public function getOperationsAttribute()
+    {
         return [
-            "edit" => url('admin/Item/viewCreateItem/'.$this->id),
-            "delete" => url('admin/Item/deleteItem/'.$this->id),
+            "edit" => url('admin/Item/edit/' . $this->id),
+            "delete" => url('admin/Item/delete/' . $this->id),
+            "images" => url('admin/Item/ItemImage/' . $this->id),
+            "properties" => url('admin/Item/ItemProperty/' . $this->id),
         ];
     }
 
-
-
-
-    public function getItemColorsSizesAttribute(){
-        return Item_color::where('item_id',$this->id)->get();
+    public function itemImages():HasMany
+    {
+        return $this->hasMany(ItemImage::class,'item_id','id');
     }
-
-
-
-
 }

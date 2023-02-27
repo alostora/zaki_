@@ -29,7 +29,7 @@ class SubCategoryCreateRequest extends FormRequest
 
             'subCategoryNameAr' => 'required|max:100',
 
-            'subCategoryImage' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:4048',
+            'subCategoryImage' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:4048',
 
             'category_id' => ['required','max:100','exists:categories,id'],
         ];

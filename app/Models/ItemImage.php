@@ -5,47 +5,54 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Item_image extends Model
+class ItemImage extends Model
 {
     use HasFactory;
+
     protected $table = 'item_images';
+
     protected $fillable = [
 
         'imageName',
+
         'isDefault',
+
         'isBanner',
+
         'isSlider',
+
         'item_id',
     ];
 
-
     protected $hidden = [
+
         'imageName',
+
         'updated_at',
+
         'created_at'
     ];
 
-
     protected $appends = [
+
         'image_url',
-        'image_path',
+
+        'operations',
     ];
 
+    public function getImageUrlAttribute()
+    {
+        
+        $imageName = url('Admin_uploads/items/' . $this->imageName);
 
-
-    
-    public function getImageUrlAttribute($value){
-        $imageName = url('Admin_uploads/items/'.$this->imageName);
-        return '<img src="'.$imageName.'" class="table-image">';
+        return '<img src="' . $imageName . '" class="table-image">';
     }
 
+    public function getOperationsAttribute()
+    {
+        return [
 
-
-    public function getImagePathAttribute($value){
-        return url('Admin_uploads/items/'.$this->imageName);
+            "delete" => url('admin/Item/ItemImage/delete/' . $this->id),
+        ];
     }
-
-
-
-
 }

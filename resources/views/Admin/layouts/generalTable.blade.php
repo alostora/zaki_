@@ -14,9 +14,9 @@
 		  		<div class="checkbox">
 		  			<label>
 		  				@if(app()->getLocale() == 'ar')
-		                 	@lang('general.all') <input type="checkbox" onclick="checkAll();" id="all"> 
+		                 		@lang('general.all') <input type="checkbox" onclick="checkAll();" id="all"> 
 		  				@else
-		                 	<input type="checkbox" id="all" onclick="checkAll();">  @lang('general.all')
+		                 		<input type="checkbox" id="all" onclick="checkAll();">  @lang('general.all')
 		  				@endif
 		          	</label>
 		          	<button disabled onclick="deleteAll()">@lang('general.delete') @lang('general.all')</button>
@@ -45,16 +45,26 @@
 							@endforeach
 				          	<td>
 					          	<div class="btn-group">
-				          	 		@if(isset($dat->operations['view']))
-				          	 			{!! $dat->operations['view'] !!}
+				          	 		@if(isset($dat->operations['images']))
+										<a class="btn btn-warning" href="{{$dat->operations['images']}}">
+											<i class="fa fa-photo"></i>
+										</a>
 				          	 		@endif
-					          		<a class="btn btn-success" href="{{$dat->operations['edit']}}">
-					          			<i class="fa fa-edit"></i>
-					          		</a>
-				          	 		<a class="btn btn-danger" href="{{$dat->operations['delete']}}" onclick="return confirm('Are you sure?');" >
-				          	 			<i class="fa fa-trash"></i>
-				          	 		</a>
-
+				          	 		@if(isset($dat->operations['properties']))
+										<a class="btn btn-info" href="{{$dat->operations['properties']}}">
+											<i class="fa fa-info"></i>
+										</a>
+				          	 		@endif
+									@if(isset($dat->operations['edit']))
+										<a class="btn btn-success" href="{{$dat->operations['edit']}}">
+											<i class="fa fa-edit"></i>
+										</a>
+									@endif
+									@if(isset($dat->operations['delete']))
+										<a class="btn btn-danger" href="{{$dat->operations['delete']}}" onclick="return confirm('Are you sure?');" >
+											<i class="fa fa-trash"></i>
+										</a>
+									@endif
 			          	 		</div>
 				          	</td>
 				          	<td width="10px">

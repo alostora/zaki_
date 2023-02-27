@@ -3,25 +3,21 @@
 use App\Http\Controllers\Admin\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\Admin\AdminController;
 use App\Http\Controllers\Admin\BrandController;
-use App\Http\Controllers\Admin\Brands;
 use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\Cities;
 use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\ColorController;
-use App\Http\Controllers\Admin\Colors;
-use App\Http\Controllers\Admin\Countries;
 use App\Http\Controllers\Admin\CountryController;
-use App\Http\Controllers\Admin\Items;
+use App\Http\Controllers\Admin\ItemController;
+use App\Http\Controllers\Admin\ItemImageController;
+use App\Http\Controllers\Admin\ItemPropertyController;
 use App\Http\Controllers\Admin\MainTypeController;
 use App\Http\Controllers\Admin\MeasureUnitController;
 use App\Http\Controllers\Admin\Orders;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SettingController;
-use App\Http\Controllers\Admin\Settings;
 use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\StateController;
-use App\Http\Controllers\Admin\States;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\VendorController;
@@ -339,21 +335,50 @@ Route::group(['prefix' => 'admin', 'middleware' => 'lang'], function () {
 			Route::get('destroyMany/{ids}', [ColorController::class, 'destroyMany'])->middleware('permissions:Permission,delete');
 			
 		});
-		
 
 		//items
 		Route::group(['prefix' => 'Item'], function () {
-			Route::get('itemsInfo', [Items::class, 'itemsInfo'])->middleware('permissions:Item,view');
-			Route::get('viewCreateItem/{id?}', [Items::class, 'viewCreateItem'])->middleware('permissions:Item,create');
-			Route::post('createItem', [Items::class, 'createItem'])->middleware('permissions:Item,create');
-			Route::get('deleteItem/{id}', [Items::class, 'deleteItem'])->middleware('permissions:Item,delete');
-			Route::get('deleteManyItems/{ids}', [Items::class, 'deleteManyItems'])->middleware('permissions:Item,delete');
+
+			Route::get('/', [ItemController::class, 'index'])->middleware('permissions:Permission,view');
+
+			Route::get('create', [ItemController::class, 'create'])->middleware('permissions:Permission,create');
+
+			Route::post('store', [ItemController::class, 'store'])->middleware('permissions:Permission,create');
+
+			Route::get('edit/{item}', [ItemController::class, 'edit'])->middleware('permissions:Permission,create');
+
+			Route::patch('update/{item}', [ItemController::class, 'update'])->middleware('permissions:Permission,create');
+
+			Route::get('delete/{item}', [ItemController::class, 'destroy'])->middleware('permissions:Permission,delete');
+
+			Route::get('destroyMany/{ids}', [ItemController::class, 'destroyMany'])->middleware('permissions:Permission,delete');
 			
-			//item_images
-			Route::post('createItemImages', [Items::class, 'createItemImages'])->middleware('permissions:Item_image,create');
-			Route::get('removedFile/{id}', [Items::class, 'removedFile'])->middleware('permissions:Item_image,delete');
-			//sizes //without permission middleware ajax request
-			Route::get('getSizes/{sub_cat_id}', [Items::class, 'getSizes']);
+			Route::group(['prefix' => 'ItemImage'], function () {
+
+				Route::get('{item}', [ItemImageController::class, 'index'])->middleware('permissions:Permission,view');
+	
+				Route::get('create/{item}', [ItemImageController::class, 'create'])->middleware('permissions:Permission,create');
+	
+				Route::post('store', [ItemImageController::class, 'store'])->middleware('permissions:Permission,create');
+	
+				Route::get('delete/{itemImage}', [ItemImageController::class, 'destroy'])->middleware('permissions:Permission,delete');
+	
+				Route::get('destroyMany/{ids}', [ItemImageController::class, 'destroyMany'])->middleware('permissions:Permission,delete');
+			});
+			
+			Route::group(['prefix' => 'ItemProperty'], function () {
+
+				Route::get('{item}', [ItemPropertyController::class, 'index'])->middleware('permissions:Permission,view');
+	
+				Route::get('create/{item}', [ItemPropertyController::class, 'create'])->middleware('permissions:Permission,create');
+	
+				Route::post('store', [ItemPropertyController::class, 'store'])->middleware('permissions:Permission,create');
+	
+				Route::get('delete/{itemProperty}', [ItemPropertyController::class, 'destroy'])->middleware('permissions:Permission,delete');
+	
+				Route::get('destroyMany/{ids}', [ItemPropertyController::class, 'destroyMany'])->middleware('permissions:Permission,delete');
+			});
+		
 		});
 
 		//orders

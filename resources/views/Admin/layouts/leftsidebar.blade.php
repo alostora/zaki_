@@ -118,7 +118,7 @@
                     </li>
 
                     <li>
-                        <a href="{{url('admin/Item/itemsInfo')}}" id="Item">
+                        <a href="{{url('admin/Item')}}" id="Item">
                             <i class="fa fa-gift"></i>@lang('leftsidebar.Items')
                         </a>
                     </li>

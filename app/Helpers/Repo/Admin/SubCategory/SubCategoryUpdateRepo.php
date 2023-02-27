@@ -19,7 +19,7 @@ class SubCategoryUpdateRepo extends SubCategoryRepo
 
          File::delete($destinationPath . $validated['subCategoryImage']);
 
-         $validated['subCategoryImage'] = Self::imageHandle($request->file('subCategoryImage'), $destinationPath);
+         $validated['subCategoryImage'] = Self::imageHandle($request->subCategoryImage, $destinationPath);
       }
 
       $subCategory->update($validated);

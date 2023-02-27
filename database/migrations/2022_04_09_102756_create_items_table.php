@@ -17,26 +17,32 @@ return new class extends Migration
             $table->id();
 
             $table->string('itemName')->nullable();
+
             $table->string('itemNameAr')->nullable();
+
             $table->text('itemDesc')->nullable();
+
             $table->text('itemDescAr')->nullable();
+
             $table->integer('itemPrice')->default(0);
+
             $table->integer('itemCount')->default(1);
+
             $table->integer('itemDiscount')->default(0);
+
             $table->boolean('active')->default(0);
-            //same size type in sizes&category table references main_types table
-            $table->bigInteger('type_id')->unsigned()->nullable();
+            
+            $table->bigInteger('main_type_id')->unsigned()->nullable();
 
-
-            $table->bigInteger('sub_cat_id')->unsigned()->nullable();
-            $table->foreign('sub_cat_id')
+            $table->bigInteger('sub_category_id')->unsigned()->nullable();
+            $table->foreign('sub_category_id')
             ->references('id')
-            ->on('s_categories')
+            ->on('sub_categories')
             ->onDelete('cascade')
             ->onUpdate('cascade');
 
-            $table->bigInteger('cat_id')->unsigned()->nullable();
-            $table->foreign('cat_id')
+            $table->bigInteger('category_id')->unsigned()->nullable();
+            $table->foreign('category_id')
             ->references('id')
             ->on('categories')
             ->onDelete('cascade')

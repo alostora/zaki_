@@ -270,8 +270,8 @@
 
 
         //editor
-        CKEDITOR.replace('itemDesc')
-        CKEDITOR.replace('itemDescAr')
+        // CKEDITOR.replace('itemDesc')
+        // CKEDITOR.replace('itemDescAr')
 
         //editor2
         //$('#itemDesc').wysihtml5()

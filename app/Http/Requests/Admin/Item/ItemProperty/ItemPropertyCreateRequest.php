@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin\Permission;
+namespace App\Http\Requests\Admin\Item\ItemProperty;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PermissionUpdateRequest extends FormRequest
+class ItemPropertyCreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,13 +25,13 @@ class PermissionUpdateRequest extends FormRequest
     {
         return [
 
-            'id' => 'max:5000',
+            'item_id' => ['required', 'exists:items,id'],
 
-            'permissionName' => 'required|max:100',
+            'size_id' => ['required', 'exists:sizes,id'],
 
-            'permissionNameAr' => 'required|max:100',
+            'color_id' => ['required', 'exists:colors,id'],
 
-            'permissions' => 'required|array',
+            'quantity' => ['required', 'integer','max:1000'],
         ];
     }
 }

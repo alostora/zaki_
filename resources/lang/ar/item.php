@@ -17,9 +17,9 @@ return [
     'bannerView' => 'Banner view',
     'active' => 'Active',
     
-    'cat_id' => 'Category',
+    'category_id' => 'Category',
     'color_id' => 'Colors',
-    'sub_cat_id' => 'Sub category',
+    'sub_category_id' => 'Sub category',
     'country_id' => 'Country',
     'size_id' => 'Sizes',
     'created_at' => 'Created at',

@@ -14,20 +14,24 @@ return new class extends Migration
     public function up()
     {
         Schema::create('item_images', function (Blueprint $table) {
+
             $table->id();
 
-
             $table->string('imageName')->nullable();
+
             $table->boolean('isDefault')->default(false);
+
             $table->boolean('isBanner')->default(false);
+
             $table->boolean('isSlider')->default(false);
 
             $table->bigInteger('item_id')->unsigned()->nullable();
+
             $table->foreign('item_id')
-            ->references('id')
-            ->on('items')
-            ->onDelete('cascade')
-            ->onUpdate('cascade');
+                ->references('id')
+                ->on('items')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
 
             $table->timestamps();
         });

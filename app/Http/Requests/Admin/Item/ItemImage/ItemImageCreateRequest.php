@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin\Permission;
+namespace App\Http\Requests\Admin\Item\ItemImage;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PermissionUpdateRequest extends FormRequest
+class ItemImageCreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,13 +25,11 @@ class PermissionUpdateRequest extends FormRequest
     {
         return [
 
-            'id' => 'max:5000',
+            'item_id' => ['required', 'exists:items,id'],
 
-            'permissionName' => 'required|max:100',
+            'images' => ['required', 'array'],
 
-            'permissionNameAr' => 'required|max:100',
-
-            'permissions' => 'required|array',
+            'images.*' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg,webp', 'max:4048'],
         ];
     }
 }
