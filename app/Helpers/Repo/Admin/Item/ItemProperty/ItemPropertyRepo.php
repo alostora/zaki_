@@ -8,12 +8,11 @@ use App\Models\Color;
 use App\Models\Item;
 use App\Models\ItemProperty;
 use App\Models\Size;
-use Illuminate\Http\Request;
 
 class ItemPropertyRepo extends Repo implements RepoInterface
 {
 
-     public static $title = 'itemProperty';
+     public static $title = 'item_property';
 
      public static $createPath = 'admin/Item/ItemProperty/create';
 
@@ -52,10 +51,9 @@ class ItemPropertyRepo extends Repo implements RepoInterface
           $item = Item::find(Request('item'));
           
           $data = [
-               'sizes' => Size::where('type_id',$item->main_type_id)->get(),
+               'sizes' => Size::where('main_type_id',$item->main_type_id)->get(),
                'colors' => Color::get(),
           ];
-          
 
           return view('Admin/Item/ItemProperty/create',$data);
      }

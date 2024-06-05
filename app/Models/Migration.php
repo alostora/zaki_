@@ -9,7 +9,7 @@ class Migration extends Model
 {
     use HasFactory;
     protected $table = 'migrations';
-    
+
     protected $hidden = [
         'migration',
     ];
@@ -18,12 +18,11 @@ class Migration extends Model
         'name',
     ];
 
-    public function getNameAttribute(){
+    public function getNameAttribute()
+    {
         $str = $this->migration;
         if (preg_match('/_create_(.*?)_table/', $str, $match) == 1) {
             return $match[1];
         }
     }
-
-
 }

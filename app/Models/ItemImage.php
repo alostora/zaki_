@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ItemImage extends Model
 {
@@ -42,7 +43,7 @@ class ItemImage extends Model
 
     public function getImageUrlAttribute()
     {
-        
+
         $imageName = url('Admin_uploads/items/' . $this->imageName);
 
         return '<img src="' . $imageName . '" class="table-image">';
@@ -54,5 +55,10 @@ class ItemImage extends Model
 
             "delete" => url('admin/Item/ItemImage/delete/' . $this->id),
         ];
+    }
+
+    public function item(): BelongsTo
+    {
+        return $this->belongsTo(Item::class, 'item_id', 'id');
     }
 }

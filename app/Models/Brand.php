@@ -67,7 +67,7 @@ class Brand extends Model
     {
         return [
             "edit" => url('admin/Brand/edit/' . $this->id),
-            
+
             "delete" => url('admin/Brand/delete/' . $this->id),
         ];
     }

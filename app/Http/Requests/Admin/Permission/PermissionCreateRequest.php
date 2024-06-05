@@ -24,9 +24,12 @@ class PermissionCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'permissionName' => 'required|max:100',
-            'permissionNameAr' => 'required|max:100',
-            'permissions' => 'required|array',
+
+            'permissionName' => ['required', 'max:100'],
+
+            'permissionNameAr' => ['required', 'max:100'],
+
+            'permissions' => ['required', 'array'],
         ];
     }
 }

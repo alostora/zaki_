@@ -10,99 +10,83 @@ class Order extends Model
     use HasFactory;
     protected $table = 'orders';
     protected $fillable = [
+
         'orderCode',
-        'status',//['new','confirmed','delivey_accept',......]
+
+        'status', //['new','confirmed','delivey_accept',......]
+
         'shippingDetails',
+
         'notes',
-        
-        'paymentMethod',//[online,cash]
-        
-        'total_price',
+
+        'paymentMethod', //[online,cash]
+
+        //'total_price',
+
         'discountCopon',
+
         'shippingValue',
 
         'user_id',
+
         'admin_id',
+
         'delivery_id',
+
+        'vandor_id',
+
     ];
 
-
     protected $appends = [
-        'user',
-        'order_status',
+
         'operations',
+
         'order_items',
     ];
 
-
     protected $casts = [
+
         'created_at' => 'date'
     ];
 
-
     public $hidden = [
+
         'updated_at',
+
         'discountCopon',
+
         'admin_id',
+
         'user_id',
+
         'delivery_id',
+
+        'vandor_id',
+
         'notes',
+
         'shippingDetails',
+
         'order_items',
+
         'status',
     ];
 
-
-    public function order_items(){
-        return $this->hasMany('App\Models\Order_item','order_id');
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class, 'order_id', 'id');
     }
 
-
-
-    public function getUserAttribute($value){
-        $user = User::find($this->user_id);
-        return 
-        '<span>anme : </span>'.$user->name .'<br>'. 
-        '<span>phone : </span>'.$user->phone.'<br>'.
-        '<span>country : </span>'.$user->country.'<br>'.
-        '<span>city : </span>'.$user->city.'<br>'.
-        '<span>address : </span>'.$user->shippingAddress;
-    }
-
-
-    public function getOperationsAttribute($value){
+    public function getOperationsAttribute($value)
+    {
 
         return [
-            "edit" => url('admin/Order/viewCreateOrder/'.$this->id),
-            "delete" => url('admin/Order/deleteOrder/'.$this->id),
-            "view" => '<button class="btn btn-warning" data-target="#items'.$this->id.'" onclick="return showItems('.$this->id.')"><span class="glyphicon glyphicon-eye-open"></span></button>',
+
+            "edit" => url('admin/Order/viewCreateOrder/' . $this->id),
+
+            "delete" => url('admin/Order/deleteOrder/' . $this->id),
+
+            "view" => '<button class="btn btn-warning" data-target="#items' . $this->id . '" onclick="return showItems(' . $this->id . ')"><span class="glyphicon glyphicon-eye-open"></span></button>',
         ];
     }
-
-
-
-
-    public function getOrderItemsAttribute($value){
-        return Order_item::where('order_id',$this->id)->get();
-    }
-
-
-
-    public function getOrderStatusAttribute($value){
-        $orderStatus = ['New','Pending','Cancel','Printed','Shipping','Dely','Escaped','Refused','Devliered','Order Received','Collected'];
-        $statusHTMLSELECT = 
-                            '<div class="form-group" style="width:150px">
-                                <select class="form-control select2" id="'.$this->id.'" onchange="return changeOrderStatus('.$this->id.')">';
-                                        
-                                        foreach($orderStatus as $status){
-                                            $selected = $status == $this->status ? 'selected' : '';
-                                            $statusHTMLSELECT .= '<option value="'.$status.'" '.$selected.'>'.$status.'</option>';
-                                        }
-        $statusHTMLSELECT .= '</select>
-                            </div>';
-
-
-        return $statusHTMLSELECT;
-    }
-
 }

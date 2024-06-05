@@ -7,7 +7,7 @@ return [
     'title' => 'Sizes',
     'sizeName' => 'Name',
     'sizeNameAr' => 'Name AR',
-    'type_id' => 'Type',
+    'main_type_id' => 'Type',
     'sizeValue' => 'Value',
     'created_at' => 'Created at',
     'updated_at' => 'Updated at',

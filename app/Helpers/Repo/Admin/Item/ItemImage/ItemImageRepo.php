@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\File;
 class ItemImageRepo extends Repo implements RepoInterface
 {
 
-     public static $title = 'itemImage';
+     public static $title = 'item_image';
 
      public static $createPath = 'admin/Item/ItemImage/create';
 

@@ -11,7 +11,7 @@ use App\Models\Size;
 
 class SizeController extends Controller
 {
-    
+
     public function index(Request $request)
     {
         return SizeRepo::get($request->get('query_string') ?? -1);
@@ -34,7 +34,7 @@ class SizeController extends Controller
 
     public function update(SizeUpdateRequest $request, Size $size)
     {
-        return SizeRepo::update($request,$size);
+        return SizeRepo::update($request, $size);
     }
 
     public function destroy(Size $size)
@@ -46,9 +46,4 @@ class SizeController extends Controller
     {
         return SizeRepo::destroyMany($ids);
     }
-
-
-
-
-
 }

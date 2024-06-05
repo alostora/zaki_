@@ -9,9 +9,9 @@
         <input type="hidden" name="item_id" value="{{Request('item')}}">
         
         <div class="form-group">
-            <label for="images" class="col-sm-2 control-label">@lang('item.images')</label>
+            <label for="images" class="col-sm-2 control-label">@lang('item_image.images')</label>
             <div class="col-sm-4">
-                <input type="file" name="images[]" class="form-control" id="images" placeholder="@lang('item.images')" required multiple>
+                <input type="file" name="images[]" class="form-control" id="images" placeholder="@lang('item_image.images')" required multiple>
             </div>
         </div>
         

@@ -15,6 +15,8 @@ return [
 
     'main_category' => 'Main category',
     
+    'main_type_id' => 'Type',
+    
     'name' => 'Name',
     'image_url' => 'Image',
     'type' => 'Main type',

@@ -4,12 +4,13 @@ return [
 
     'id' => '#',
     'operations' => 'Operations',
-    'title' => 'Admins',
-    'name' => 'Name',
+	'title' => 'Admins',
+	'name' => 'Name',
     'email' => 'Email',
     'password' => 'Password',
     'confirm_password' => 'Confirm password',
-    'permissions' => 'Permissions',
+    'permission_id' => 'Permission',
+    'permission' => 'Permission',
     'created_at' => 'Created at',
     'updated_at' => 'Updated at',
 ];

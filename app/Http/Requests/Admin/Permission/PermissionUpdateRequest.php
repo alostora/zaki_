@@ -25,13 +25,13 @@ class PermissionUpdateRequest extends FormRequest
     {
         return [
 
-            'id' => 'max:5000',
+            'id' => ['max','5000'],
 
-            'permissionName' => 'required|max:100',
+            'permissionName' => ['required', 'max:100'],
 
-            'permissionNameAr' => 'required|max:100',
+            'permissionNameAr' => ['required', 'max:100'],
 
-            'permissions' => 'required|array',
+            'permissions' => ['required', 'array'],
         ];
     }
 }

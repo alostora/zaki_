@@ -14,9 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('main_types', function (Blueprint $table) {
+
             $table->id();
+            
             $table->string('typeName')->nullable();
+            
             $table->string('typeNameAr')->nullable();
+            
             $table->timestamps();
         });
     }

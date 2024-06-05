@@ -31,7 +31,7 @@ class CategoryCreateRequest extends FormRequest
 
             'categoryImage' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:4048',
 
-            'type_id' => ['required','max:100','exists:main_types,id'],
+            'main_type_id' => ['required','max:100','exists:main_types,id'],
         ];
     }
 }

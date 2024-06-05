@@ -23,6 +23,18 @@ return new class extends Migration
 
             $table->string('subCategoryImage')->nullable();
 
+            $table->bigInteger('main_type_id')->unsigned()->nullable();
+
+            $table->foreign('main_type_id')
+
+                ->references('id')
+
+                ->on('main_types')
+
+                ->onDelete('cascade')
+
+                ->onUpdate('cascade');
+
             $table->bigInteger('category_id')->unsigned()->nullable();
 
             $table->foreign('category_id')

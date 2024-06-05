@@ -8,7 +8,7 @@ return [
     'categoryName' => 'Name',
     'categoryNameAr' => 'Name AR',
     'categoryImage' => 'Image',
-    'type_id' => 'Main type',
+    'main_type_id' => 'Main type',
     'created_at' => 'Created at',
     'updated_at' => 'Updated at',
 

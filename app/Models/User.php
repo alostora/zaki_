@@ -18,15 +18,25 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+
         'name',
+
         'email',
+
         'phone',
+
         'image',
+
         'gender',
+
         'birthDate',
+
         'password',
+
         'country_id',
+
         'city_id',
+
         'shippingAddress',
     ];
 
@@ -36,73 +46,83 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
+
         'image',
+
         'gender',
+
         'birthDate',
+
         'image_path',
+
         'password',
+
         'verify_token',
+
         'country_id',
+
         'city_id',
+
         'api_token',
+
         'remember_token',
+
         'email_verified_at',
+
         'created_at',
+
         'updated_at',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
 
     protected $appends = [
+
         'image_url',
+
         'image_path',
+
         'country',
+
         'city',
+
         'operations'
     ];
 
-
-
-    public function getImageUrlAttribute(){
-        $image = url('uploads/users/'.$this->image);
-        return '<img src="'.$image.'" class="table-image">';
+    public function getImageUrlAttribute()
+    {
+        $image = url('uploads/users/' . $this->image);
+        return '<img src="' . $image . '" class="table-image">';
     }
 
-
-    public function getImagePathAttribute(){
-        return url('uploads/users/'.$this->image);
+    public function getImagePathAttribute()
+    {
+        return url('uploads/users/' . $this->image);
     }
 
-
-    public function getCountryAttribute(){
-
+    public function getCountryAttribute()
+    {
         $country = Country::find($this->country_id);
 
         return $country ? $country->name : null;
     }
 
-
-    public function getCityAttribute(){
+    public function getCityAttribute()
+    {
         $city = City::find($this->city_id);
 
         return $city ? $city->name : null;
     }
 
-
-
-    public function getOperationsAttribute(){
-
+    public function getOperationsAttribute()
+    {
         return [
-            "edit" => url('admin/User/edit/'.$this->id),
-            "delete" => url('admin/User/delete/'.$this->id),
+
+            "edit" => url('admin/User/edit/' . $this->id),
+
+            "delete" => url('admin/User/delete/' . $this->id),
         ];
     }
-
 }

@@ -14,7 +14,7 @@
                             @endif
                         </div>
                     </div>
-                    <div class="box-body" style="">
+                    <div class="box-body">
                         <div class="form-group">
                             <label for="item_color_id{{$orderItem->id}}" class="col-sm-2 control-label">
                                 @lang('order.item_color_id')
@@ -25,13 +25,13 @@
                                     @if(!empty($items))
                                         @foreach($items as $item)
                                             <optgroup label="{{$item->name}}">
-                                                @if(count($item->item_colors_sizes))
-                                                    @foreach($item->item_colors_sizes as $item_color_id)
+                                                @if(count($item->itemProperties))
+                                                    @foreach($item->itemProperties as $property)
                                                         <?php
-                                                            $selected = $orderItem->item_color_id == $item_color_id->id ? 'selected' : ''; 
+                                                            $selected = $orderItem->property == $property->id ? 'selected' : ''; 
                                                         ?>
-                                                        <option value="{{$item_color_id->id}}" {{$selected}}>
-                                                            {{$item->name}} {{$item_color_id->sizes->name}} {{$item_color_id->colors->name}}
+                                                        <option value="{{$property->id}}" {{$selected}}>
+                                                            {{$item->name}} {{$property->size->name}} {{$property->color->name}}
                                                         </option>
                                                     @endforeach
                                                 @endif
@@ -45,7 +45,7 @@
                                 @lang('order.itemPrice')
                             </label>
                             <div class="col-sm-4">
-                                <input id="itemPrice{{$orderItem->id.$key}}" type="number" class="form-control" placeholder="@lang('order.itemPrice')" value="{{$orderItem->item_colors_sizes->itemPrice}}" required readonly>
+                                <input id="itemPrice{{$orderItem->id.$key}}" type="number" class="form-control" placeholder="@lang('order.itemPrice')" value="" required readonly>
                             </div>
 
                         </div>
@@ -62,7 +62,7 @@
                                 @lang('order.totalPrice')
                             </label>
                             <div class="col-sm-4">
-                                <input id="totalPrice{{$orderItem->id.$key}}" type="number" class="form-control totalPrice" placeholder="@lang('order.totalPrice')" readonly value="{{$orderItem->item_count*$orderItem->item_colors_sizes->itemPrice}}">
+                                <input id="totalPrice{{$orderItem->id.$key}}" type="number" class="form-control totalPrice" placeholder="@lang('order.totalPrice')" readonly value="">
                             </div>
                         </div>
                     </div>
@@ -94,10 +94,10 @@
                             @if(!empty($items))
                                 @foreach($items as $item)
                                     <optgroup label="{{$item->name}}">
-                                        @if(count($item->item_colors_sizes))
-                                            @foreach($item->item_colors_sizes as $item_color_id)
+                                        @if(count($item->itemProperties))
+                                            @foreach($item->itemProperties as $item_color_id)
                                                 <option value="{{$item_color_id->id}}">
-                                                    {{$item->name}} {{$item_color_id->sizes->name}} {{$item_color_id->colors->name}}
+                                                    {{$item->name}} {{$item_color_id->size->name}} {{$item_color_id->color->name}}
                                                 </option>
                                             @endforeach
                                         @endif

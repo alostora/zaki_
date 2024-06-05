@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use App\Models\Migration_role;
+use App\Models\MigrationRole;
 use App\Models\Migration;
 use App\Models\Role;
 
@@ -23,7 +23,7 @@ class Permissions
         $path = "\App\Models\\".$model;
         $modelName = new $path();
         $tableName = $modelName->getTable();
-        $admin_roles = Migration_role::where('permission_id',auth()->guard('admin')->user()->permission_id)->get();
+        $admin_roles = MigrationRole::where('permission_id',auth()->guard('admin')->user()->permission_id)->get();
 
 
         foreach($admin_roles as $admin_role){

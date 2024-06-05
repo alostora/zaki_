@@ -49,7 +49,6 @@ class State extends Model
         'operations'
     ];
 
-
     public function getNameAttribute()
     {
         return app()->getLocale() == 'ar' ? $this->stateName : $this->stateName;
@@ -71,24 +70,22 @@ class State extends Model
         }
     }
 
+    public function getOperationsAttribute()
+    {
+        return [
+            "edit" => url('admin/State/edit/' . $this->id),
+
+            "delete" => url('admin/State/delete/' . $this->id),
+        ];
+    }
+
     public function country(): BelongsTo
     {
         return $this->belongsTo(Country::class, 'country_id', 'id');
     }
-  
+
     public function city(): BelongsTo
     {
         return $this->belongsTo(City::class, 'city_id', 'id');
-    }
-
-    public function getOperationsAttribute()
-    {
-        return [
-
-            "edit" => url('admin/State/edit/' . $this->id),
-
-            "delete" => url('admin/State/delete/' . $this->id),
-
-        ];
     }
 }

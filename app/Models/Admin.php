@@ -13,35 +13,51 @@ class Admin extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $fillable = [
+
         'name',
+        
         'email',
+        
         'permission_id',
+        
         'password',
     ];
 
     protected $hidden = [
+        
         'password',
+        
         'remember_token',
+        
         'email_verified_at',
+        
         'permission_id',
+        
         'created_at',
+        
         'updated_at',
     ];
 
     protected $casts = [
+
         'email_verified_at' => 'datetime',
     ];
 
     protected $appends = [
-        'permissions',
+        
+        'permission',
+        
         'operations',
     ];
 
-    public function getPermissionsAttribute($value)
+    public function getPermissionAttribute($value)
     {
         $permission = Permission::find($this->permission_id);
+
         if ($permission) {
+
             return $permission->name;
+
         }
 
         return 'no permission for this user';
@@ -50,7 +66,9 @@ class Admin extends Authenticatable
     public function getOperationsAttribute($value)
     {
         return [
+
             "edit" => url('admin/Admin/edit/' . $this->id),
+            
             "delete" => url('admin/Admin/delete/' . $this->id),
         ];
     }

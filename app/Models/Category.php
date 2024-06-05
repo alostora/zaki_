@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Category extends Model
@@ -20,7 +21,7 @@ class Category extends Model
 
         "categoryImage",
 
-        "type_id", //same size type in sizes table
+        "main_type_id",
     ];
 
     protected $hidden = [
@@ -33,7 +34,7 @@ class Category extends Model
 
         'image_path',
 
-        'type_id',
+        'main_type_id',
 
         'updated_at',
 
@@ -72,7 +73,7 @@ class Category extends Model
 
     public function getTypeAttribute()
     {
-        $mainType = MainType::find($this->type_id);
+        $mainType = MainType::find($this->main_type_id);
 
         if (!empty($mainType)) {
 
@@ -89,12 +90,16 @@ class Category extends Model
             "edit" => url('admin/Category/edit/' . $this->id),
 
             "delete" => url('admin/Category/delete/' . $this->id)
-
         ];
     }
 
     public function subCategories(): HasMany
     {
-        return $this->hasMAny(SubCategory::class, 'category_id');
+        return $this->hasMAny(SubCategory::class, 'category_id', 'id');
+    }
+
+    public function mainType(): BelongsTo
+    {
+        return $this->belongsTo(MainType::class, 'main_type_id', 'id');
     }
 }

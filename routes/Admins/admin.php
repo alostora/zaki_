@@ -43,6 +43,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'lang'], function () {
 
 		Route::get('/', [AdminAuthController::class, 'dashboard']);
 
+		//admins
 		Route::group(['prefix' => 'Admin'], function () {
 
 			//admins
@@ -59,6 +60,42 @@ Route::group(['prefix' => 'admin', 'middleware' => 'lang'], function () {
 			Route::get('delete/{admin}', [AdminController::class, 'destroy'])->middleware('permissions:Admin,delete');
 
 			Route::get('destroyMany/{ids}', [AdminController::class, 'destroyMany'])->middleware('permissions:Admin,delete');
+		});
+
+		//users
+		Route::group(['prefix' => 'User'], function () {
+
+			Route::get('/', [UserController::class, 'index'])->middleware('permissions:Permission,view');
+
+			Route::get('create', [UserController::class, 'create'])->middleware('permissions:Permission,create');
+
+			Route::post('store', [UserController::class, 'store'])->middleware('permissions:Permission,create');
+
+			Route::get('edit/{user}', [UserController::class, 'edit'])->middleware('permissions:Permission,create');
+
+			Route::patch('update/{user}', [UserController::class, 'update'])->middleware('permissions:Permission,create');
+
+			Route::get('delete/{user}', [UserController::class, 'destroy'])->middleware('permissions:Permission,delete');
+
+			Route::get('destroyMany/{ids}', [UserController::class, 'destroyMany'])->middleware('permissions:Permission,delete');
+		});
+
+		//vendros
+		Route::group(['prefix' => 'Vendor'], function () {
+
+			Route::get('/', [VendorController::class, 'index'])->middleware('permissions:Permission,view');
+
+			Route::get('create', [VendorController::class, 'create'])->middleware('permissions:Permission,create');
+
+			Route::post('store', [VendorController::class, 'store'])->middleware('permissions:Permission,create');
+
+			Route::get('edit/{vendor}', [VendorController::class, 'edit'])->middleware('permissions:Permission,create');
+
+			Route::patch('update/{vendor}', [VendorController::class, 'update'])->middleware('permissions:Permission,create');
+
+			Route::get('delete/{vendor}', [VendorController::class, 'destroy'])->middleware('permissions:Permission,delete');
+
+			Route::get('destroyMany/{ids}', [VendorController::class, 'destroyMany'])->middleware('permissions:Permission,delete');
 		});
 
 		//roles
@@ -98,24 +135,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'lang'], function () {
 			Route::get('destroyMany/{ids}', [PermissionController::class, 'destroyMany'])->middleware('permissions:Permission,delete');
 		});
 
-		//users
-		Route::group(['prefix' => 'User'], function () {
-
-			Route::get('/', [UserController::class, 'index'])->middleware('permissions:Permission,view');
-
-			Route::get('create', [UserController::class, 'create'])->middleware('permissions:Permission,create');
-
-			Route::post('store', [UserController::class, 'store'])->middleware('permissions:Permission,create');
-
-			Route::get('edit/{user}', [UserController::class, 'edit'])->middleware('permissions:Permission,create');
-
-			Route::patch('update/{user}', [UserController::class, 'update'])->middleware('permissions:Permission,create');
-
-			Route::get('delete/{user}', [UserController::class, 'destroy'])->middleware('permissions:Permission,delete');
-
-			Route::get('destroyMany/{ids}', [UserController::class, 'destroyMany'])->middleware('permissions:Permission,delete');
-		});
-
 		//main types
 		Route::group(['prefix' => 'MainType'], function () {
 
@@ -132,24 +151,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'lang'], function () {
 			Route::get('delete/{mainType}', [MainTypeController::class, 'destroy'])->middleware('permissions:Permission,delete');
 
 			Route::get('destroyMany/{ids}', [MainTypeController::class, 'destroyMany'])->middleware('permissions:Permission,delete');
-		});
-
-		//vendros
-		Route::group(['prefix' => 'Vendor'], function () {
-
-			Route::get('/', [VendorController::class, 'index'])->middleware('permissions:Permission,view');
-
-			Route::get('create', [VendorController::class, 'create'])->middleware('permissions:Permission,create');
-
-			Route::post('store', [VendorController::class, 'store'])->middleware('permissions:Permission,create');
-
-			Route::get('edit/{vendor}', [VendorController::class, 'edit'])->middleware('permissions:Permission,create');
-
-			Route::patch('update/{vendor}', [VendorController::class, 'update'])->middleware('permissions:Permission,create');
-
-			Route::get('delete/{vendor}', [VendorController::class, 'destroy'])->middleware('permissions:Permission,delete');
-
-			Route::get('destroyMany/{ids}', [VendorController::class, 'destroyMany'])->middleware('permissions:Permission,delete');
 		});
 
 		//sizes
@@ -383,6 +384,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'lang'], function () {
 
 		//orders
 		Route::group(['prefix' => 'Order'], function () {
+			
 			Route::get('ordersInfo', [Orders::class, 'ordersInfo'])->middleware('permissions:Order,view');
 			Route::get('viewCreateOrder/{id?}', [Orders::class, 'viewCreateOrder'])->middleware('permissions:Order,create');
 			Route::post('createUser', [Orders::class, 'createUser'])->middleware('permissions:User,create');

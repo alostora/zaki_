@@ -9,7 +9,7 @@ use App\Models\MainType;
 class MainTypeRepo extends Repo implements RepoInterface
 {
 
-     public static $title = 'mainType';
+     public static $title = 'main_type';
 
      public static $createPath = 'admin/MainType/create';
 

@@ -36,16 +36,17 @@ class Role extends Model
         'operations'
     ];
 
-    public function getNameAttribute($value)
+    public function getNameAttribute()
     {
         return app()->getLocale() == 'ar' ? $this->roleNameAr : $this->roleName;
     }
 
-    public function getOperationsAttribute($value)
+    public function getOperationsAttribute()
     {
-
         return [
+
             "edit" => url('admin/Role/edit/' . $this->id),
+
             "delete" => url('admin/Role/delete/' . $this->id),
         ];
     }

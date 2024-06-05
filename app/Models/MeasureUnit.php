@@ -47,9 +47,9 @@ class MeasureUnit extends Model
 
     public function getOperationsAttribute()
     {
-
         return [
             "edit" => url('admin/MeasureUnit/edit/' . $this->id),
+
             "delete" => url('admin/MeasureUnit/delete/' . $this->id),
         ];
     }

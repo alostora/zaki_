@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Size extends Model
 {
@@ -19,7 +20,7 @@ class Size extends Model
 
         "sizeValue",
 
-        "type_id", //same category type in categories table
+        "main_type_id", //same category type in categories table
     ];
 
     protected $hidden = [
@@ -49,7 +50,7 @@ class Size extends Model
 
     public function getMainTypeAttribute($value)
     {
-        $mainType = MainType::find($this->type_id);
+        $mainType = MainType::find($this->main_type_id);
         if (!empty($mainType)) {
             return $mainType->name;
         }
@@ -59,7 +60,13 @@ class Size extends Model
     {
         return [
             "edit" => url('admin/Size/edit/' . $this->id),
+
             "delete" => url('admin/Size/delete/' . $this->id),
         ];
+    }
+    
+    public function mainType(): BelongsTo
+    {
+        return $this->belongsTo(MainType::class, 'main_type_id', 'id');
     }
 }

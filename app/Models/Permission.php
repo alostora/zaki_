@@ -53,8 +53,8 @@ class Permission extends Model
         ];
     }
 
-    public function migrationRoles():HasMany
+    public function migrationRoles(): HasMany
     {
-        return $this->hasMany(Migration_role::class,'permission_id');
+        return $this->hasMany(MigrationRole::class, 'permission_id');
     }
 }

@@ -34,7 +34,7 @@ class PermissionController extends Controller
 
     public function update(PermissionUpdateRequest $request, Permission $permission)
     {
-        return PermissionRepo::update($request,$permission);
+        return PermissionRepo::update($request, $permission);
     }
 
     public function destroy(Permission $permission)

@@ -25,17 +25,15 @@ class AdminCreateRequest extends FormRequest
     {
         return [
 
-            "id" => "nullable|integer",
+            "name" => ['required','string','max:100'],
 
-            "name" => "required|string|max:100",
+            'email' => ['required','unique:admins,email','max:100'],
 
-            'email' => 'required|unique:admins,email|max:100',
+            'password' => ['required','max:100'],
 
-            'password' => 'required|max:100',
+            'confirmPassword' => ['same:password'],
 
-            'confirmPassword' => 'same:password',
-
-            'permission_id' => 'required|integer',
+            'permission_id' => ['required','integer','exists:permissions,id'],
         ];
     }
 }

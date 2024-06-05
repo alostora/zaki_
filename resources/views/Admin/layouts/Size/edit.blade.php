@@ -22,14 +22,14 @@
             <div class="col-sm-4">
                 <input type="text" name="sizeValue" class="form-control" id="sizeValue" placeholder="@lang('size.sizeValue')" value="{{$data->sizeValue}}" required>
             </div>
-            <label for="type_id" class="col-sm-2 control-label">@lang('size.type_id')</label>
+            <label for="main_type_id" class="col-sm-2 control-label">@lang('size.main_type_id')</label>
             <div class="col-sm-4">
-                <?php $type_id = !empty($data) ? $data->type_id : ''; ?>
-                <select name="type_id" class="form-control select2" required id="type_id">
+                <?php $main_type_id = !empty($data) ? $data->main_type_id : ''; ?>
+                <select name="main_type_id" class="form-control select2" required id="main_type_id">
                     <option value="">@lang('general.choose')</option>
                     @if(!empty($types))
                         @foreach($types as $type)
-                            <option value="{{$type->id}}" {{$type_id == $type->id ? 'selected' : ''}}>{{$type->name}}</option>
+                            <option value="{{$type->id}}" {{$main_type_id == $type->id ? 'selected' : ''}}>{{$type->name}}</option>
                         @endforeach
                     @endif
                 </select>

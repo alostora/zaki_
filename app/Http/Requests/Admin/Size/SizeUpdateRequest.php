@@ -24,11 +24,16 @@ class SizeUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => 'max:5000',
+
+            'id' => 'required',
+
             "sizeName" => "required|max:15",
+
             "sizeNameAr" => "required|max:15",
+
             "sizeValue" => "required|max:100",
-            "type_id" => "required|max:100",
+
+            'main_type_id' => ['required', 'max:100', 'exists:main_types,id'],
         ];
     }
 }

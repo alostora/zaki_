@@ -61,6 +61,7 @@ class Country extends Model
     public function getImageUrlAttribute()
     {
         $countryFlag = url('Admin_uploads/countries/' . $this->countryFlag);
+
         return '<img src="' . $countryFlag . '" class="table-image">';
     }
 
@@ -69,16 +70,22 @@ class Country extends Model
         return url('Admin_uploads/countries/' . $this->countryFlag);
     }
 
-    public function cities(): HasMany
-    {
-        return $this->hasMany(City::class, 'country_id');
-    }
-
     public function getOperationsAttribute()
     {
         return [
             "edit" => url('admin/Country/edit/' . $this->id),
+
             "delete" => url('admin/Country/delete/' . $this->id),
         ];
+    }
+
+    public function cities(): HasMany
+    {
+        return $this->hasMany(City::class, 'country_id');
+    }
+    
+    public function states(): HasMany
+    {
+        return $this->hasMany(State::class, 'city_id', 'id');
     }
 }

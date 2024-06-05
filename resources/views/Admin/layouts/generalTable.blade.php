@@ -26,7 +26,7 @@
                 <tr>
                   	@if(count($data))
 					@foreach($data[0]->toArray() as $keyy=>$val)
-						<th>@lang($title.'.'.$keyy)</th>
+						<th style="text-align:center">@lang($title.'.'.$keyy)</th>
 					@endforeach
 				@endif
 				<th></th>
@@ -38,12 +38,12 @@
 						<tr>
 				          	@foreach($dat->toArray() as $keyy=>$val)
 				          		@if($keyy != "operations" && $keyy != "id")
-									<td>{!! $val !!}</td>
+									<td style="text-align:center">{!! $val !!}</td>
 								@elseif($keyy == "id")	
-									<td>{{ $key+1}}</td>
+									<td style="text-align:center">{{ $key+1}}</td>
 								@endif
 							@endforeach
-				          	<td>
+				          	<td style="text-align:center">
 					          	<div class="btn-group">
 				          	 		@if(isset($dat->operations['images']))
 										<a class="btn btn-warning" href="{{$dat->operations['images']}}">

@@ -21,9 +21,9 @@
         <input type="file" name="categoryImage" class="form-control" placeholder="@lang('category.categoryImage')">
       </div>
 
-      <label for="type_id" class="col-sm-2 control-label">@lang('size.type_id')</label>
+      <label for="main_type_id" class="col-sm-2 control-label">@lang('size.main_type_id')</label>
       <div class="col-sm-4">
-        <select name="type_id" class="form-control select2" required id="type_id">
+        <select name="main_type_id" class="form-control select2" required id="main_type_id">
           <option value="">@lang('general.choose')</option>
           @if(!empty($types))
             @foreach($types as $type)

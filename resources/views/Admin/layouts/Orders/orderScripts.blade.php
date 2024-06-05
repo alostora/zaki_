@@ -130,10 +130,10 @@
                                     '@if(!empty($items))'+
                                         '@foreach($items as $item)'+
                                             '<optgroup label="{{$item->name}}">'+
-                                                '@if(count($item->item_colors_sizes))'+
-                                                    '@foreach($item->item_colors_sizes as $item_color_id)'+
+                                                '@if(count($item->itemProperties))'+
+                                                    '@foreach($item->itemProperties as $item_color_id)'+
                                                         '<option value="{{$item_color_id->id}}">'+
-                                                            '{{$item->name}} {{$item_color_id->sizes->name}} {{$item_color_id->colors->name}}'+
+                                                            '{{$item->name}} {{$item_color_id->size->name}} {{$item_color_id->color->name}}'+
                                                         '</option>'+
                                                     '@endforeach'+
                                                '@endif'+

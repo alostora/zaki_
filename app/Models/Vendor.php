@@ -18,12 +18,19 @@ class Vendor extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+
         'name',
+
         'email',
+
         'phone',
+
         'image',
+
         'gender',
+
         'birthDate',
+
         'password',
     ];
 
@@ -33,14 +40,23 @@ class Vendor extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
+
         'image',
+
         'image_path',
+
         'password',
+
         'verify_token',
+
         'api_token',
+
         'remember_token',
+
         'email_verified_at',
+
         'created_at',
+
         'updated_at',
     ];
 
@@ -54,26 +70,33 @@ class Vendor extends Authenticatable
     ];
 
     protected $appends = [
+
         'image_url',
+
         'image_path',
+
         'operations'
     ];
 
-    public function getImageUrlAttribute($value){
-        $image = url('uploads/vendors/'.$this->image);
-        return '<img src="'.$image.'" class="table-image">';
+    public function getImageUrlAttribute($value)
+    {
+        $image = url('uploads/vendors/' . $this->image);
+
+        return '<img src="' . $image . '" class="table-image">';
     }
 
-    public function getImagePathAttribute($value){
-        return url('uploads/vendors/'.$this->image);
+    public function getImagePathAttribute($value)
+    {
+        return url('uploads/vendors/' . $this->image);
     }
 
-    public function getOperationsAttribute($value){
-
+    public function getOperationsAttribute($value)
+    {
         return [
-            "edit" => url('admin/Vendor/edit/'.$this->id),
-            "delete" => url('admin/Vendor/delete/'.$this->id),
+
+            "edit" => url('admin/Vendor/edit/' . $this->id),
+
+            "delete" => url('admin/Vendor/delete/' . $this->id),
         ];
     }
-
 }

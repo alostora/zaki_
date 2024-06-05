@@ -6,17 +6,17 @@
         @csrf
         @method("PATCH")
         
-        <input type="hidden" name="id" value="{{($data->id}}">
+        <input type="hidden" name="id" value="{{$data->id}}">
 
         <div class="form-group">
             <label for="typeName" class="col-sm-2 control-label">@lang('main_type.typeName')</label>
             <div class="col-sm-4">
-                <input type="text" name="typeName" class="form-control" id="typeName" placeholder="@lang('main_type.typeName')" value="{{($data->typeName}}" required>
+                <input type="text" name="typeName" class="form-control" id="typeName" placeholder="@lang('main_type.typeName')" value="{{$data->typeName}}" required>
             </div>
 
             <label for="typeNameAr" class="col-sm-2 control-label">@lang('main_type.typeNameAr')</label>
             <div class="col-sm-4">
-                <input type="text" name="typeNameAr" class="form-control" placeholder="@lang('main_type.typeNameAr')" value="{{($data->typeNameAr}}" required id="typeNameAr">
+                <input type="text" name="typeNameAr" class="form-control" placeholder="@lang('main_type.typeNameAr')" value="{{$data->typeNameAr}}" required id="typeNameAr">
             </div>
         </div>
 

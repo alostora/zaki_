@@ -12,8 +12,9 @@ class ItemCreateRepo extends ItemRepo
      {
           $validated = $request->validated();
           $category_id = SubCategory::find($validated['sub_category_id'])->category_id;
-          $category = Category::find($category_id)->category_id;
-          $validated['main_type_id'] = $category->type_id;
+          $category = Category::find($category_id);
+
+          $validated['main_type_id'] = $category->main_type_id;
 
           return Item::create($validated);
      }

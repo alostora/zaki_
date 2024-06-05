@@ -19,8 +19,10 @@ class SubCategory extends Model
         "subCategoryNameAr",
 
         "subCategoryImage",
-        
+
         "category_id",
+
+        "main_type_id",
     ];
 
     protected $hidden = [
@@ -34,6 +36,8 @@ class SubCategory extends Model
         'image_path',
 
         'category_id',
+
+        'main_type_id',
 
         'updated_at',
 
@@ -81,15 +85,19 @@ class SubCategory extends Model
 
     public function getOperationsAttribute()
     {
-
         return [
             "edit" => url('admin/SubCategory/edit/' . $this->id),
+
             "delete" => url('admin/SubCategory/delete/' . $this->id),
         ];
     }
 
-    public function category():BelongsTo
+    public function category(): BelongsTo
     {
-        return $this->belongsTo(Category::class,'category_id');
+        return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
+    public function mainType(): BelongsTo
+    {
+        return $this->belongsTo(MainType::class, 'main_type_id', 'id');
     }
 }

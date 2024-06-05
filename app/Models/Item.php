@@ -117,9 +117,13 @@ class Item extends Model
     public function getOperationsAttribute()
     {
         return [
+
             "edit" => url('admin/Item/edit/' . $this->id),
+
             "delete" => url('admin/Item/delete/' . $this->id),
+
             "images" => url('admin/Item/ItemImage/' . $this->id),
+
             "properties" => url('admin/Item/ItemProperty/' . $this->id),
         ];
     }
@@ -127,5 +131,10 @@ class Item extends Model
     public function itemImages():HasMany
     {
         return $this->hasMany(ItemImage::class,'item_id','id');
+    }
+    
+    public function itemProperties():HasMany
+    {
+        return $this->hasMany(ItemProperty::class,'item_id','id');
     }
 }

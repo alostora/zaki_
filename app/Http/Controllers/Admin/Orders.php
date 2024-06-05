@@ -36,7 +36,9 @@ class Orders extends Controller
 
 
     public function viewCreateOrder($id=false){
+
         $data['data'] = Order::find($id);
+        
         if(!empty($data['data'])){
             $data['order_itemss'] = Order_item::where('order_id',$data['data']->id)->get();
         }

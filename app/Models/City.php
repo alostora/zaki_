@@ -15,22 +15,33 @@ class City extends Model
     protected $table = 'cities';
 
     protected $fillable = [
+
         'cityName',
+
         'cityNameAr',
+
         'country_id',
     ];
 
     protected $hidden = [
+
         'cityName',
+
         'cityNameAr',
+
         'country_id',
+
         'updated_at',
+
         'created_at'
     ];
 
     protected $appends = [
+
         'name',
+
         'country_name',
+
         'operations'
     ];
 
@@ -42,24 +53,27 @@ class City extends Model
     public function getCountryNameAttribute()
     {
         $country = Country::find($this->country_id);
-        return $country->countryName;
-    }
 
-    public function states(): HasMany
-    {
-        return $this->hasMany(State::class, 'city_id');
-    }
-    
-    public function country(): BelongsTo
-    {
-        return $this->belongsTo(Country::class, 'country_id', 'id');
+        return $country->countryName;
     }
 
     public function getOperationsAttribute()
     {
         return [
+
             "edit" => url('admin/City/edit/' . $this->id),
+
             "delete" => url('admin/City/delete/' . $this->id),
         ];
+    }
+
+    public function states(): HasMany
+    {
+        return $this->hasMany(State::class, 'city_id', 'id');
+    }
+
+    public function country(): BelongsTo
+    {
+        return $this->belongsTo(Country::class, 'country_id', 'id');
     }
 }

@@ -19,18 +19,41 @@ class ItemProperty extends Model
         'color_id',
 
         'size_id',
-        
+
         'quantity',
     ];
 
-    public function color() : BelongsTo
+    protected $hidden = [
+
+        "created_at",
+
+        "updated_at",
+    ];
+    protected $appends = [
+
+        'operations',
+    ];
+
+    public function getOperationsAttribute()
     {
-        return $this->belongsTo(Color::class,'color_id','id');
-    }
-    
-    public function size() : BelongsTo
-    {
-        return $this->belongsTo(Size::class,'size_id','id');
+        return [
+
+            "delete" => url('admin/Item/ItemProperty/delete/' . $this->id),
+        ];
     }
 
+    public function item(): BelongsTo
+    {
+        return $this->belongsTo(Item::class, 'item_id', 'id');
+    }
+
+    public function color(): BelongsTo
+    {
+        return $this->belongsTo(Color::class, 'color_id', 'id');
+    }
+
+    public function size(): BelongsTo
+    {
+        return $this->belongsTo(Size::class, 'size_id', 'id');
+    }
 }

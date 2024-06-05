@@ -47,17 +47,17 @@ class Color extends Model
         return app()->getLocale() == 'ar' ? $this->colorNameAr : $this->colorName;
     }
 
-
     public function getCodeAttribute()
     {
-        return '<label class="colorCode" style="background-color:' . $this->colorCode . '"></label>';
+        return '<label class="colorCode" style="background-color:' . $this->colorCode . '">' . $this->colorCode . '</label>';
     }
 
     public function getOperationsAttribute()
     {
-
         return [
+
             "edit" => url('admin/Color/edit/' . $this->id),
+
             "delete" => url('admin/Color/delete/' . $this->id),
         ];
     }

@@ -9,7 +9,7 @@
         <input type="hidden" name="item_id" value="{{Request('item')}}">
 
         <div class="form-group">
-            <label for="quantity" class="col-sm-2 control-label">@lang('item.quantity')</label>
+            <label for="quantity" class="col-sm-2 control-label">@lang('item_property.quantity')</label>
             <div class="col-sm-4">
                 <input type="number" class="form-control" name="quantity" id="quantity" value="1" require>
             </div>
@@ -17,7 +17,7 @@
         
         <div class="form-group">
 
-            <label for="size_id" class="col-sm-2 control-label">@lang('item.size_id')</label>
+            <label for="size_id" class="col-sm-2 control-label">@lang('item_property.size_id')</label>
 
             <div class="col-sm-4">
                 <select name="size_id" class="form-control select2" id="size_id" required>
@@ -29,7 +29,7 @@
                 </select>
             </div>
        
-            <label for="color_id" class="col-sm-2 control-label">@lang('item.color_id')</label>
+            <label for="color_id" class="col-sm-2 control-label">@lang('item_property.color_id')</label>
             <div class="col-sm-4">
                 <select name="color_id" class="form-control select2" id="color_id" required>
                     @if(!empty($colors))

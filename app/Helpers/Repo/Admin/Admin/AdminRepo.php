@@ -25,9 +25,13 @@ class AdminRepo extends Repo implements RepoInterface
           $admins = AdminSearchRepo::searchAllAdmins($query_string);
 
           $data = [
+
                'data' => $admins,
+
                'title' => self::$title,
+
                'createPath' => url(self::$createPath),
+               
                'deletePath' => url(self::$deletePath),
           ];
 
